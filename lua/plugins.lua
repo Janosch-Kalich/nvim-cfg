@@ -33,4 +33,5 @@ return require('packer').startup(function(use)
         'romgrk/barbar.nvim'
     }
     use 'wfxr/minimap.vim'
+    use 'voldikss/vim-floaterm'
 end)

@@ -61,3 +61,6 @@ map('n', '<leader>p', '<Cmd>BufferPick<CR>', {})
 map('n', '<leader>q', ':NvimTreeToggle<CR>', {})
 
 map('n', '<leader>ö', ':MinimapToggle<CR>', {})
+
+map('n', '<leader>t', ':FloatermToggle<CR>', {})
+map('t', '<Esc>', '<C-\\><C-n>', {})
