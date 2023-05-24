@@ -25,7 +25,7 @@ return require('packer').startup(function(use)
     use {
         'mfussenegger/nvim-dap',
         'jay-babu/mason-nvim-dap.nvim',
-        'nvim-dap-ui'
+	'rcarriga/nvim-dap-ui'
     }
     use {
         'lewis6991/gitsigns.nvim',
