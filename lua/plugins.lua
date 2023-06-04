@@ -34,4 +34,5 @@ return require('packer').startup(function(use)
     }
     use 'wfxr/minimap.vim'
     use 'voldikss/vim-floaterm'
+    use 'natecraddock/workspaces.nvim'
 end)

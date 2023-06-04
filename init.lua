@@ -14,6 +14,7 @@ require('_telescope')
 require('_dap')
 require('_tabs')
 require('_minimap')
+require('_workspaces')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'

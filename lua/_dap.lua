@@ -46,3 +46,21 @@ dap.configurations.cpp = {
         cwd = '${workspaceFolder}/debug'
     }
 }
+
+dap.adapters.flutter = {
+    name = "flutter",
+    type = "executable",
+    command = "C:\\flutter\\bin\\flutter.bat",
+    args = { "debug_adapter" },
+}
+
+dap.configurations.dart = {
+    {
+        type = "flutter",
+        request = "launch",
+        program = "${file}",
+        cwd = "${workspaceFolder}",
+        name = "Launch flutter app",
+        toolArgs = { }
+    }
+}
