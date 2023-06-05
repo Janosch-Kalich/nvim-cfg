@@ -13,54 +13,56 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-dap.adapters.lldb = {
-  type = 'executable',
-  command = 'C:\\Program Files\\LLVM\\bin\\lldb-vscode.exe',
-  name = 'lldb'
-}
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+    dap.adapters.lldb = {
+    type = 'executable',
+    command = 'C:\\Program Files\\LLVM\\bin\\lldb-vscode.exe',
+    name = 'lldb'
+    }
 
-dap.configurations.cpp = {
-    {
-        name = 'Launch',
-        type = 'lldb',
-        request = 'launch',
-        program = function()
-            return coroutine.create(function(coro)
-            local opts = {}
-            pickers
-            .new(opts, {
-                prompt_title = "Path to executable",
-                finder = finders.new_oneshot_job({ "fd", "--hidden", "--no-ignore", "--type", "x" }, {}),
-                sorter = conf.generic_sorter(opts),
-                attach_mappings = function(buffer_number)
-                actions.select_default:replace(function()
-                    actions.close(buffer_number)
-                    coroutine.resume(coro, action_state.get_selected_entry()[1])
+    dap.configurations.cpp = {
+        {
+            name = 'Launch',
+            type = 'lldb',
+            request = 'launch',
+            program = function()
+                return coroutine.create(function(coro)
+                local opts = {}
+                pickers
+                .new(opts, {
+                    prompt_title = "Path to executable",
+                    finder = finders.new_oneshot_job({ "fd", "--hidden", "--no-ignore", "--type", "x" }, {}),
+                    sorter = conf.generic_sorter(opts),
+                    attach_mappings = function(buffer_number)
+                    actions.select_default:replace(function()
+                        actions.close(buffer_number)
+                        coroutine.resume(coro, action_state.get_selected_entry()[1])
+                    end)
+                    return true
+                    end,
+                })
+                :find()
                 end)
-                return true
-                end,
-            })
-            :find()
-            end)
-        end,
-        cwd = '${workspaceFolder}/debug'
+            end,
+            cwd = '${workspaceFolder}/debug'
+        }
     }
-}
 
-dap.adapters.flutter = {
-    name = "flutter",
-    type = "executable",
-    command = "C:\\flutter\\bin\\flutter.bat",
-    args = { "debug_adapter" },
-}
-
-dap.configurations.dart = {
-    {
-        type = "flutter",
-        request = "launch",
-        program = "${file}",
-        cwd = "${workspaceFolder}",
-        name = "Launch flutter app",
-        toolArgs = { }
+    dap.adapters.flutter = {
+        name = "flutter",
+        type = "executable",
+        command = "C:\\flutter\\bin\\flutter.bat",
+        args = { "debug_adapter" },
     }
-}
+
+    dap.configurations.dart = {
+        {
+            type = "flutter",
+            request = "launch",
+            program = "${file}",
+            cwd = "${workspaceFolder}",
+            name = "Launch flutter app",
+            toolArgs = { }
+        }
+    }
+end

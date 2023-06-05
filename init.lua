@@ -19,16 +19,20 @@ require('_workspaces')
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
     vim.g.neovide_refresh_rate = 165
-    vim.g.neovide_padding_top=0
-    vim.g.neovide_padding_left=0
-    vim.g.neovide_padding_right=0
-    vim.g.neovide_padding_bottom=0
+    vim.g.neovide_padding_top = 0
+    vim.g.neovide_padding_left = 10
+    vim.g.neovide_padding_right = 0
+    vim.g.neovide_padding_bottom = 0
+    vim.g.neovide_no_idle = true
+    vim.g.neovide_fullscreen = true
+    --[[vim.g.neovide_profiler = true--]]
 end
 
 vim.opt.shiftwidth = 2
 vim.wo.number = true
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
+vim.wo.relativenumber = true
 
 vim.g.mapleader = ','
 
@@ -43,6 +47,9 @@ vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, {})
 vim.keymap.set('n', '<leader>k', dap.step_over, {})
 vim.keymap.set('n', '<leader>j', dap.step_into, {})
 vim.keymap.set('n', '<leader>m', dap_ui.toggle, {})
+
+map('n', '<C-v>', '"+p', {})
+map('n', '<C-c>', '"+yi', {})
 
 map('n', '<C-Tab>', '<Cmd>BufferNext<CR>', {})
 map('n', '<C-S-Tab>', '<Cmd>BufferPrevious<CR>', {})
