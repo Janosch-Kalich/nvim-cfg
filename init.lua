@@ -15,6 +15,9 @@ require('_dap')
 require('_tabs')
 require('_minimap')
 require('_workspaces')
+require('_aerial')
+require('_litee')
+require('_http')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
@@ -25,7 +28,7 @@ if vim.g.neovide then
     vim.g.neovide_padding_bottom = 0
     vim.g.neovide_no_idle = true
     vim.g.neovide_fullscreen = true
-    --[[vim.g.neovide_profiler = true--]]
+    --vim.g.neovide_profiler = true
 end
 
 vim.opt.shiftwidth = 2
@@ -39,7 +42,6 @@ vim.g.mapleader = ','
 local builtin = require('telescope.builtin')
 local dap = require('dap')
 local dap_ui = require('dapui')
-
 vim.keymap.set('n', '<leader>a', builtin.find_files, {})
 vim.keymap.set('n', '<leader>y', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>l', dap.continue, {})
@@ -47,6 +49,9 @@ vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, {})
 vim.keymap.set('n', '<leader>k', dap.step_over, {})
 vim.keymap.set('n', '<leader>j', dap.step_into, {})
 vim.keymap.set('n', '<leader>m', dap_ui.toggle, {})
+
+vim.keymap.set('n', '<leader>x', '<cmd>AerialToggle!<CR>', {})
+vim.keymap.set('n', '<leader>r', '<Plug>RestNvim<CR>', {})
 
 map('n', '<C-v>', '"+p', {})
 map('n', '<C-c>', '"+yi', {})
@@ -72,3 +77,5 @@ map('n', '<leader>ö', ':MinimapToggle<CR>', {})
 
 map('n', '<leader>t', ':FloatermToggle<CR>', {})
 map('t', '<Esc>', '<C-\\><C-n>', {})
+
+require'alpha'.setup(require'alpha.themes.startify'.config)

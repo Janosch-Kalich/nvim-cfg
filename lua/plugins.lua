@@ -1,5 +1,10 @@
----@diagnostic disable: 1011
 return require('packer').startup(function(use)
+    use {
+      'goolord/alpha-nvim',
+      config = function ()
+          require'alpha'.setup(require'alpha.themes.dashboard'.config)
+      end
+    }
     use 'wbthomason/packer.nvim';
     use {
         'williamboman/mason.nvim',
@@ -35,4 +40,22 @@ return require('packer').startup(function(use)
     use 'wfxr/minimap.vim'
     use 'voldikss/vim-floaterm'
     use 'natecraddock/workspaces.nvim'
+    use 'jubnzv/virtual-types.nvim'
+    use 'stevearc/aerial.nvim'
+    use 'ldelossa/litee.nvim'
+    use 'ldelossa/litee-bookmarks.nvim'
+    use 'ldelossa/litee-symboltree.nvim'
+    use 'j-hui/fidget.nvim'
+    use 'akinsho/flutter-tools.nvim'
+    use 'rest-nvim/rest.nvim'
+    use 'ray-x/web-tools.nvim'
+    use 'yamatsum/nvim-cursorline'
+    use {
+      'glepnir/dashboard-nvim',
+      event = 'VimEnter',
+      config = function()
+        require('dashboard').setup {}
+      end,
+      requires = {'nvim-tree/nvim-web-devicons'}
+    }
 end)

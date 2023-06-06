@@ -9,4 +9,4 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-require'nvim-treesitter.install'.compilers = { "clang" }
+require'nvim-treesitter.install'.compilers = { "clang", "gcc" }
