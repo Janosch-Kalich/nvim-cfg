@@ -18,6 +18,7 @@ require('_workspaces')
 require('_aerial')
 require('_litee')
 require('_http')
+require('_hop')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
@@ -42,6 +43,8 @@ vim.g.mapleader = ','
 local builtin = require('telescope.builtin')
 local dap = require('dap')
 local dap_ui = require('dapui')
+local hop = require('hop')
+
 vim.keymap.set('n', '<leader>a', builtin.find_files, {})
 vim.keymap.set('n', '<leader>y', builtin.live_grep, {})
 vim.keymap.set('n', '<leader>l', dap.continue, {})
@@ -49,9 +52,16 @@ vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, {})
 vim.keymap.set('n', '<leader>k', dap.step_over, {})
 vim.keymap.set('n', '<leader>j', dap.step_into, {})
 vim.keymap.set('n', '<leader>m', dap_ui.toggle, {})
+vim.keymap.set('n', '<leader>ss', vim.lsp.buf.hover, {})
 
 vim.keymap.set('n', '<leader>x', '<cmd>AerialToggle!<CR>', {})
 vim.keymap.set('n', '<leader>r', '<Plug>RestNvim<CR>', {})
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+
+vim.keymap.set('n', '<leader>hw', hop.hint_words, {})
+vim.keymap.set('n', '<leader>hl', hop.hint_lines, {})
+vim.keymap.set('n', '<leader>ha', hop.hint_anywhere, {})
+vim.keymap.set('n', '<leader>hp', hop.hint_patterns, {})
 
 map('n', '<C-v>', '"+p', {})
 map('n', '<C-c>', '"+yi', {})
@@ -76,6 +86,8 @@ map('n', '<leader>q', ':NvimTreeToggle<CR>', {})
 map('n', '<leader>ö', ':MinimapToggle<CR>', {})
 
 map('n', '<leader>t', ':FloatermToggle<CR>', {})
+
 map('t', '<Esc>', '<C-\\><C-n>', {})
+
 
 require'alpha'.setup(require'alpha.themes.startify'.config)

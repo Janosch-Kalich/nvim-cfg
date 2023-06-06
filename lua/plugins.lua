@@ -50,12 +50,5 @@ return require('packer').startup(function(use)
     use 'rest-nvim/rest.nvim'
     use 'ray-x/web-tools.nvim'
     use 'yamatsum/nvim-cursorline'
-    use {
-      'glepnir/dashboard-nvim',
-      event = 'VimEnter',
-      config = function()
-        require('dashboard').setup {}
-      end,
-      requires = {'nvim-tree/nvim-web-devicons'}
-    }
+    use 'phaazon/hop.nvim'
 end)
