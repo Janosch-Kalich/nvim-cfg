@@ -19,6 +19,9 @@ require('_aerial')
 require('_litee')
 require('_http')
 require('_hop')
+require('_autopairs')
+require('_blankline')
+require('_webtools')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
@@ -37,8 +40,8 @@ vim.wo.number = true
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.wo.relativenumber = true
-
-vim.g.mapleader = ','
+ 
+vim.g.mapleader = ' '
 
 local builtin = require('telescope.builtin')
 local dap = require('dap')

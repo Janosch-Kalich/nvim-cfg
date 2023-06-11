@@ -51,4 +51,7 @@ return require('packer').startup(function(use)
     use 'ray-x/web-tools.nvim'
     use 'yamatsum/nvim-cursorline'
     use 'phaazon/hop.nvim'
+    use 'https://git.sr.ht/~whynothugo/lsp_lines.nvim'
+    use 'windwp/nvim-autopairs'
+    use 'lukas-reineke/indent-blankline.nvim'
 end)
