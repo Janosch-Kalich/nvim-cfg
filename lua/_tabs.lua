@@ -7,5 +7,8 @@ require('barbar').setup({
     hightlight_alternate = false,
     hightlight_visible = false,
     insert_at_end = true,
-    maximum_padding = 2
+    maximum_padding = 2,
+    icons = {
+      button = ''
+    }
 })
