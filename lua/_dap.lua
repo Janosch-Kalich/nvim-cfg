@@ -16,12 +16,16 @@ local action_state = require("telescope.actions.state")
 dap.adapters.lldb = {
     type = 'executable',
     command = 'C:\\Program Files\\LLVM\\bin\\lldb-vscode.exe',
+    env = {
+      LLDB_DEBUGSERVER_PATH= "C:\\Program Files\\LLVM\\bin\\lldb-server.exe"
+    },
     name = 'lldb'
 }
 
 dap.adapters.codelldb = {
     type = "server",
     port = "10101",
+    terminal = "external",
     executable = {
         command = vim.loop.os_uname().sysname == 'Windows_NT' and 
             "C:\\Users\\janka\\AppData\\Local\\nvim-data\\mason\\bin\\codelldb.cmd"

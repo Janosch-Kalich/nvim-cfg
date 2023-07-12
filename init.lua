@@ -43,6 +43,8 @@ vim.wo.relativenumber = true
  
 vim.g.mapleader = ' '
 
+vim.g.floaterm_shell = 'pwsh'
+
 local builtin = require('telescope.builtin')
 local dap = require('dap')
 local dap_ui = require('dapui')
