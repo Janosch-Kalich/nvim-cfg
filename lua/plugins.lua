@@ -65,4 +65,5 @@ return require('packer').startup(function(use)
     run = function() vim.fn["mkdp#util#install"]() end,
   })
   use 'lervag/vimtex'
+  use 'normen/vim-pio'
 end)
