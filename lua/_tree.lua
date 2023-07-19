@@ -4,7 +4,7 @@ require("nvim-tree").setup({
     dotfiles = false,
     },
     git = {
-        enable = true,
+        enable = false,
         ignore = false,
         show_on_dirs = true,
         show_on_open_dirs = true,

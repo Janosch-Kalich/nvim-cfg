@@ -25,6 +25,7 @@ require('_webtools')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
+    vim.g.neovide_scale_factor = 0.8
     vim.g.neovide_refresh_rate = 165
     vim.g.neovide_padding_top = 0
     vim.g.neovide_padding_left = 10

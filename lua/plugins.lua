@@ -45,7 +45,10 @@ return require('packer').startup(function(use)
   use 'ldelossa/litee.nvim'
   use 'ldelossa/litee-bookmarks.nvim'
   use 'ldelossa/litee-symboltree.nvim'
-  use 'j-hui/fidget.nvim'
+  use {
+    'j-hui/fidget.nvim',
+    tag = 'legacy'
+  }
   use 'akinsho/flutter-tools.nvim'
   use 'rest-nvim/rest.nvim'
   use 'ray-x/web-tools.nvim'
