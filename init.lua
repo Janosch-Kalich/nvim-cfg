@@ -44,7 +44,11 @@ vim.wo.relativenumber = true
  
 vim.g.mapleader = ' '
 
-vim.g.floaterm_shell = 'pwsh'
+if (vim.loop.os_uname().sysname == 'Linux') then
+  vim.g.floaterm_shell = 'zsh'
+elseif (vim.loop.os_uname().sysname == 'Windows') then
+  vim.g.floaterm_shell = 'pwsh'
+end
 
 local builtin = require('telescope.builtin')
 local dap = require('dap')
