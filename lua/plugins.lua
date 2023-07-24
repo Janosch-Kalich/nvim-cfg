@@ -69,4 +69,7 @@ return require('packer').startup(function(use)
   })
   use 'lervag/vimtex'
   use 'normen/vim-pio'
+  use 'nacro90/numb.nvim'
+  use 'toppair/reach.nvim'
+  use 'frabjous/knap'
 end)

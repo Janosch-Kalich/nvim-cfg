@@ -22,6 +22,9 @@ require('_hop')
 require('_autopairs')
 require('_blankline')
 require('_webtools')
+require('_numb')
+require('_reach')
+require('_knap')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
@@ -54,6 +57,7 @@ local builtin = require('telescope.builtin')
 local dap = require('dap')
 local dap_ui = require('dapui')
 local hop = require('hop')
+local directions = require('hop.hint').HintDirection
 
 vim.keymap.set('n', '<leader>a', builtin.find_files, {})
 vim.keymap.set('n', '<leader>y', builtin.live_grep, {})
@@ -69,7 +73,7 @@ vim.keymap.set('n', '<leader>r', '<Plug>RestNvim<CR>', {})
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
 vim.keymap.set('n', '<leader>hw', hop.hint_words, {})
-vim.keymap.set('n', '<leader>hl', hop.hint_lines, {})
+vim.keymap.set('n', '<leader>hl', hop.hint_lines_skip_whitespace, {})
 vim.keymap.set('n', '<leader>ha', hop.hint_anywhere, {})
 vim.keymap.set('n', '<leader>hp', hop.hint_patterns, {})
 
@@ -99,5 +103,12 @@ map('n', '<leader>t', ':FloatermToggle<CR>', {})
 
 map('t', '<Esc>', '<C-\\><C-n>', {})
 
+vim.keymap.set('n', '<leader>rb', function()
+  require('reach').buffers({
+    auto_handles = vim.split('jfkdlshgurnciemxow', '')
+  })
+end, {})
+
+vim.keymap.set({ 'n', 'v', 'i' },'<F5>', function() require("knap").process_once() end)
 
 require'alpha'.setup(require'alpha.themes.startify'.config)

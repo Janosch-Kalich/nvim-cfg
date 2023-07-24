@@ -1,1 +1,3 @@
-require'hop'.setup()
+require'hop'.setup({
+  multi_windows = true
+})
