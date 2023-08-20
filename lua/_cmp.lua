@@ -41,4 +41,9 @@ require('mason-lspconfig').setup_handlers({
         capabilities = lsp_capabilities,
     })
   end,
+  ['clangd'] = function()
+    lspconfig.clangd.setup {
+      cmd = { 'clangd', '--query-driver=/**/*' }
+    }
+  end
 })

@@ -44,8 +44,19 @@ vim.wo.number = true
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.wo.relativenumber = true
+
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+autocmd('VimEnter', { pattern = '*', command = 'silent !tmux set status off' })
+autocmd('VimLeave', {
+  pattern = '*',
+  callback = function()
+    vim.fn.jobstart('tmux set status on', { detach = true })
+  end
+})
  
 vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
 
 if (vim.loop.os_uname().sysname == 'Linux') then
   vim.g.floaterm_shell = 'zsh'
@@ -73,9 +84,13 @@ vim.keymap.set('n', '<leader>r', '<Plug>RestNvim<CR>', {})
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
 vim.keymap.set('n', '<leader>hw', hop.hint_words, {})
+vim.keymap.set('v', '<leader>hw', hop.hint_words, {})
 vim.keymap.set('n', '<leader>hl', hop.hint_lines_skip_whitespace, {})
+vim.keymap.set('v', '<leader>hl', hop.hint_lines_skip_whitespace, {})
 vim.keymap.set('n', '<leader>ha', hop.hint_anywhere, {})
+vim.keymap.set('v', '<leader>ha', hop.hint_anywhere, {})
 vim.keymap.set('n', '<leader>hp', hop.hint_patterns, {})
+vim.keymap.set('v', '<leader>hp', hop.hint_patterns, {})
 
 map('n', '<C-v>', '"+p', {})
 map('n', '<C-c>', '"+yi', {})

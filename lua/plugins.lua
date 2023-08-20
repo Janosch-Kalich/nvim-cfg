@@ -54,13 +54,10 @@ return require('packer').startup(function(use)
   use 'ray-x/web-tools.nvim'
   use 'yamatsum/nvim-cursorline'
   use 'phaazon/hop.nvim'
-  use({
+  use {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     as = "lsp_lines",
-    config = function()
-      require("lsp_lines").register_lsp_virtual_lines()
-    end,
-  })
+  }
   use 'windwp/nvim-autopairs'
   use 'lukas-reineke/indent-blankline.nvim'
   use({
@@ -72,4 +69,23 @@ return require('packer').startup(function(use)
   use 'nacro90/numb.nvim'
   use 'toppair/reach.nvim'
   use 'frabjous/knap'
+  use {
+    "nvim-neorg/neorg",
+    config = function()
+      require('neorg').setup {
+        load = {
+          ["core.defaults"] = {}, -- Loads default behaviour
+          ["core.concealer"] = {}, -- Adds pretty icons to your documents
+          ["core.dirman"] = { -- Manages Neorg workspaces
+          config = {
+            workspaces = {
+              notes = "~/notes",
+            },
+          },
+        },
+      },
+    }
+    end,
+    requires = "nvim-lua/plenary.nvim",
+  }
 end)
