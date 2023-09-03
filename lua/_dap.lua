@@ -12,7 +12,7 @@ local finders = require("telescope.finders")
 local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
-
+--[[
 dap.adapters.lldb = {
     type = 'executable',
     command = 'C:\\Program Files\\LLVM\\bin\\lldb-vscode.exe',
@@ -20,24 +20,21 @@ dap.adapters.lldb = {
       LLDB_DEBUGSERVER_PATH= "C:\\Program Files\\LLVM\\bin\\lldb-server.exe"
     },
     name = 'lldb'
-}
+}]]--
 
 dap.adapters.codelldb = {
     type = "server",
     port = "10101",
     terminal = "external",
     executable = {
-        command = vim.loop.os_uname().sysname == 'Windows_NT' and 
-            "C:\\Users\\janka\\AppData\\Local\\nvim-data\\mason\\bin\\codelldb.cmd"
-            or
-            "~/.local/share/nvim/mason/bin/codelldb",
+        command = vim.fn.stdpath("data") .. "/mason/bin/codelldb",
         args = { "--port", "10101" },
         detached = false,
     }
 }
 
 dap.configurations.cpp = {
-    {
+    --[[{
         name = 'Launch (lldb)',
         type = 'lldb',
         request = 'launch',
@@ -61,7 +58,7 @@ dap.configurations.cpp = {
             end)
         end,
         cwd = '${workspaceFolder}/debug'
-    },
+      },]]--
     {
         name = 'Launch (codelldb)',
         type = 'codelldb',
@@ -91,3 +88,4 @@ dap.configurations.cpp = {
 }
 
 dap.configurations.rust = dap.configurations.cpp
+dap.configurations.c = dap.configurations.cpp

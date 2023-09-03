@@ -88,4 +88,5 @@ return require('packer').startup(function(use)
     end,
     requires = "nvim-lua/plenary.nvim",
   }
+  use 'mfussenegger/nvim-jdtls'
 end)
