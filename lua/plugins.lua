@@ -1,4 +1,4 @@
-return require('packer').startup(function(use)
+require('packer').startup(function(use)
   use {
     'goolord/alpha-nvim',
     config = function ()
@@ -89,4 +89,10 @@ return require('packer').startup(function(use)
     requires = "nvim-lua/plenary.nvim",
   }
   use 'mfussenegger/nvim-jdtls'
+  if vim.loop.os_uname().sysname == 'Linux' then
+    use {
+      'aserowy/tmux.nvim',
+      config = function () return require('tmux').setup() end
+    }
+  end
 end)

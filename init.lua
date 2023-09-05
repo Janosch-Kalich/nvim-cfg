@@ -47,13 +47,13 @@ vim.wo.relativenumber = true
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-autocmd('VimEnter', { pattern = '*', command = 'silent !tmux set status off' })
+--[[autocmd('VimEnter', { pattern = '*', command = 'silent !tmux set status off' })
 autocmd('VimLeave', {
   pattern = '*',
   callback = function()
     vim.fn.jobstart('tmux set status on', { detach = true })
   end
-})
+})]]--
  
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
