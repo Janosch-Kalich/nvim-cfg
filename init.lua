@@ -28,14 +28,14 @@ require('_knap')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
-    vim.g.neovide_scale_factor = 0.8
-    vim.g.neovide_refresh_rate = 165
+    vim.g.neovide_scale_factor = 1
+    vim.g.neovide_refresh_rate = 300
     vim.g.neovide_padding_top = 0
     vim.g.neovide_padding_left = 10
     vim.g.neovide_padding_right = 0
     vim.g.neovide_padding_bottom = 0
     vim.g.neovide_no_idle = true
-    vim.g.neovide_fullscreen = true
+    --vim.g.neovide_fullscreen = true
     --vim.g.neovide_profiler = true
 end
 
@@ -72,15 +72,18 @@ local directions = require('hop.hint').HintDirection
 
 vim.keymap.set('n', '<leader>a', builtin.find_files, {})
 vim.keymap.set('n', '<leader>y', builtin.live_grep, {})
+vim.keymap.set('n', '<leader>e', "<Cmd>Telescope workspaces<CR>", {})
 vim.keymap.set('n', '<leader>l', dap.continue, {})
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, {})
 vim.keymap.set('n', '<leader>k', dap.step_over, {})
 vim.keymap.set('n', '<leader>j', dap.step_into, {})
 vim.keymap.set('n', '<leader>m', dap_ui.toggle, {})
 vim.keymap.set('n', '<leader>ss', vim.lsp.buf.hover, {})
+vim.keymap.set('n', '<leader>dd', vim.lsp.buf.declaration, {})
+vim.keymap.set('n', '<leader>rr', vim.lsp.buf.references, {})
 
 vim.keymap.set('n', '<leader>x', '<cmd>AerialToggle!<CR>', {})
-vim.keymap.set('n', '<leader>r', '<Plug>RestNvim<CR>', {})
+vim.keymap.set('n', '<leader>rn', '<Plug>RestNvim<CR>', {})
 vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
 
 vim.keymap.set('n', '<leader>hw', hop.hint_words, {})
