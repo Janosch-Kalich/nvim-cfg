@@ -53,7 +53,7 @@ require('packer').startup(function(use)
   use 'rest-nvim/rest.nvim'
   use 'ray-x/web-tools.nvim'
   use 'yamatsum/nvim-cursorline'
-  use 'phaazon/hop.nvim'
+  use 'smoka7/hop.nvim'
   use {
     "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
     as = "lsp_lines",
