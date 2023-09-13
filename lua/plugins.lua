@@ -55,14 +55,14 @@ require('packer').startup(function(use)
   use 'yamatsum/nvim-cursorline'
   use 'smoka7/hop.nvim'
   use {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    as = "lsp_lines",
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    as = 'lsp_lines',
   }
   use 'windwp/nvim-autopairs'
   use 'lukas-reineke/indent-blankline.nvim'
   use({
-    "iamcco/markdown-preview.nvim",
-    run = function() vim.fn["mkdp#util#install"]() end,
+    'iamcco/markdown-preview.nvim',
+    run = function() vim.fn['mkdp#util#install']() end,
   })
   use 'lervag/vimtex'
   use 'normen/vim-pio'
@@ -70,23 +70,23 @@ require('packer').startup(function(use)
   use 'toppair/reach.nvim'
   use 'frabjous/knap'
   use {
-    "nvim-neorg/neorg",
+    'nvim-neorg/neorg',
     config = function()
       require('neorg').setup {
         load = {
-          ["core.defaults"] = {}, -- Loads default behaviour
-          ["core.concealer"] = {}, -- Adds pretty icons to your documents
-          ["core.dirman"] = { -- Manages Neorg workspaces
+          ['core.defaults'] = {}, -- Loads default behaviour
+          ['core.concealer'] = {}, -- Adds pretty icons to your documents
+          ['core.dirman'] = { -- Manages Neorg workspaces
           config = {
             workspaces = {
-              notes = "~/notes",
+              notes = '~/notes',
             },
           },
         },
       },
     }
     end,
-    requires = "nvim-lua/plenary.nvim",
+    requires = 'nvim-lua/plenary.nvim',
   }
   use 'mfussenegger/nvim-jdtls'
   if vim.loop.os_uname().sysname == 'Linux' then
