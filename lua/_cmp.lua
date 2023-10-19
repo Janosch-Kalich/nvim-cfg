@@ -43,7 +43,9 @@ require('mason-lspconfig').setup_handlers({
   end,
   ['clangd'] = function()
     lspconfig.clangd.setup {
-      cmd = { 'clangd', '--query-driver=/**/*' }
+      filetypes = {
+        "c", "cpp", "objc", "objcpp", "cuda"
+      }
     }
   end
 })

@@ -54,12 +54,14 @@ autocmd('VimLeave', {
     vim.fn.jobstart('tmux set status on', { detach = true })
   end
 })]]--
+
+vim.g.vimtex_view_method = "mupdf"
  
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 if (vim.loop.os_uname().sysname == 'Linux') then
-  vim.g.floaterm_shell = 'zsh'
+  vim.g.floaterm_shell = 'fish'
 elseif (vim.loop.os_uname().sysname == 'Windows') then
   vim.g.floaterm_shell = 'pwsh'
 end
