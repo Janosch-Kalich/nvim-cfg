@@ -120,7 +120,7 @@ map('n', '<leader>t', ':FloatermToggle<CR>', {})
 
 map('t', '<Esc>', '<C-\\><C-n>', {})
 
-vim.keymap.set('n', '<leader>rb', function()
+vim.keymap.set('n', '<leader>w', function()
   require('reach').buffers({
     auto_handles = vim.split('jfkdlshgurnciemxow', '')
   })

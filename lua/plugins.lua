@@ -79,7 +79,7 @@ require('packer').startup(function(use)
           ['core.dirman'] = { -- Manages Neorg workspaces
           config = {
             workspaces = {
-              notes = '~/notes',
+              notes = vim.env.NOTES_DIR,
             },
           },
         },
