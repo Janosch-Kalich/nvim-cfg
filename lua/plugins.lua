@@ -80,15 +80,16 @@ require('lazy').setup({
           ['core.defaults'] = {}, -- Loads default behaviour
           ['core.concealer'] = {}, -- Adds pretty icons to your documents
           ['core.dirman'] = { -- Manages Neorg workspaces
-          config = {
-            workspaces = {
-              notes = vim.env.NOTES_DIR,
-            },
-          },
-        },
+            config = {
+              workspaces = {
+                notes = vim.env.NOTES_DIR,
+              }
+            }
+          }
+        }
       }
-    },
-    dependencies = 'nvim-lua/plenary.nvim',
+    end,
+    dependencies = 'nvim-lua/plenary.nvim'
   },
   'mfussenegger/nvim-jdtls',
   {
