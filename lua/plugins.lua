@@ -1,75 +1,78 @@
-require('packer').startup(function(use)
-  use {
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require('lazy').setup({
+  {
     'goolord/alpha-nvim',
     config = function ()
       require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
-  }
-  use 'wbthomason/packer.nvim';
-  use {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'neovim/nvim-lspconfig',
-  }
-  use {
-    'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-buffer',
-    'hrsh7th/cmp-path',
-    'hrsh7th/cmp-cmdline',
-    'hrsh7th/nvim-cmp'
-  }
-  use 'L3MON4D3/LuaSnip'
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'nvim-treesitter/nvim-treesitter'
-  use 'EdenEast/nightfox.nvim'
-  use 'nvim-lualine/lualine.nvim'
-  use 'nvim-lua/plenary.nvim'
-  use 'Shatur/neovim-session-manager'
-  use 'nvim-tree/nvim-tree.lua'
-  use 'nvim-telescope/telescope.nvim'
-  use {
-    'mfussenegger/nvim-dap',
-    'jay-babu/mason-nvim-dap.nvim',
-    'rcarriga/nvim-dap-ui'
-  }
-  use {
-    'lewis6991/gitsigns.nvim',
-    'nvim-tree/nvim-web-devicons',
-    'romgrk/barbar.nvim'
-  }
-  use 'wfxr/minimap.vim'
-  use 'voldikss/vim-floaterm'
-  use 'natecraddock/workspaces.nvim'
-  use 'jubnzv/virtual-types.nvim'
-  use 'stevearc/aerial.nvim'
-  use 'ldelossa/litee.nvim'
-  use 'ldelossa/litee-bookmarks.nvim'
-  use 'ldelossa/litee-symboltree.nvim'
-  use {
+  },
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'neovim/nvim-lspconfig',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-cmdline',
+  'hrsh7th/nvim-cmp',
+  'L3MON4D3/LuaSnip',
+  'saadparwaiz1/cmp_luasnip',
+  'nvim-treesitter/nvim-treesitter',
+  'EdenEast/nightfox.nvim',
+  'nvim-lualine/lualine.nvim',
+  'nvim-lua/plenary.nvim',
+  'Shatur/neovim-session-manager',
+  'nvim-tree/nvim-tree.lua',
+  'nvim-telescope/telescope.nvim',
+  'mfussenegger/nvim-dap',
+  'jay-babu/mason-nvim-dap.nvim',
+  'rcarriga/nvim-dap-ui',
+  'lewis6991/gitsigns.nvim',
+  'nvim-tree/nvim-web-devicons',
+  'romgrk/barbar.nvim',
+  'voldikss/vim-floaterm',
+  'natecraddock/workspaces.nvim',
+  'jubnzv/virtual-types.nvim',
+  'stevearc/aerial.nvim',
+  'ldelossa/litee.nvim',
+  'ldelossa/litee-bookmarks.nvim',
+  'ldelossa/litee-symboltree.nvim',
+  {
     'j-hui/fidget.nvim',
     tag = 'legacy'
-  }
-  use 'akinsho/flutter-tools.nvim'
-  use 'rest-nvim/rest.nvim'
-  use 'ray-x/web-tools.nvim'
-  use 'yamatsum/nvim-cursorline'
-  use 'smoka7/hop.nvim'
-  use {
+  },
+  'akinsho/flutter-tools.nvim',
+  'rest-nvim/rest.nvim',
+  'ray-x/web-tools.nvim',
+  'yamatsum/nvim-cursorline',
+  'smoka7/hop.nvim',
+  {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
     as = 'lsp_lines',
-  }
-  use 'windwp/nvim-autopairs'
-  use 'lukas-reineke/indent-blankline.nvim'
-  use({
+  },
+  'windwp/nvim-autopairs',
+  'lukas-reineke/indent-blankline.nvim';
+  {
     'iamcco/markdown-preview.nvim',
     run = function() vim.fn['mkdp#util#install']() end,
-  })
-  use 'lervag/vimtex'
-  use 'normen/vim-pio'
-  use 'nacro90/numb.nvim'
-  use 'toppair/reach.nvim'
-  use 'frabjous/knap'
-  use {
+  },
+  'lervag/vimtex',
+  'normen/vim-pio',
+  'nacro90/numb.nvim',
+  'toppair/reach.nvim',
+  'frabjous/knap',
+  {
     'nvim-neorg/neorg',
     config = function()
       require('neorg').setup {
@@ -77,22 +80,21 @@ require('packer').startup(function(use)
           ['core.defaults'] = {}, -- Loads default behaviour
           ['core.concealer'] = {}, -- Adds pretty icons to your documents
           ['core.dirman'] = { -- Manages Neorg workspaces
-          config = {
-            workspaces = {
-              notes = '~/notes',
+            config = {
+              workspaces = {
+                notes = vim.env.NOTES_DIR,
+              },
             },
           },
         },
-      },
-    }
+      }
     end,
     requires = 'nvim-lua/plenary.nvim',
+  },
+  'mfussenegger/nvim-jdtls',
+  {
+    'aserowy/tmux.nvim',
+    config = function () return require('tmux').setup() end,
+    cond = function () return vim.loop.os_uname().sysname == 'Linux' end
   }
-  use 'mfussenegger/nvim-jdtls'
-  if vim.loop.os_uname().sysname == 'Linux' then
-    use {
-      'aserowy/tmux.nvim',
-      config = function () return require('tmux').setup() end
-    }
-  end
-end)
+})

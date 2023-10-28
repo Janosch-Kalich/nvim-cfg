@@ -13,14 +13,12 @@ require('_tree')
 require('_telescope')
 require('_dap')
 require('_tabs')
-require('_minimap')
 require('_workspaces')
 require('_aerial')
 require('_litee')
 require('_http')
 require('_hop')
 require('_autopairs')
-require('_blankline')
 require('_webtools')
 require('_numb')
 require('_reach')
@@ -44,6 +42,7 @@ vim.wo.number = true
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
 vim.wo.relativenumber = true
+
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
@@ -114,13 +113,11 @@ map('n', '<leader>p', '<Cmd>BufferPick<CR>', {})
 
 map('n', '<leader>q', ':NvimTreeToggle<CR>', {})
 
-map('n', '<leader>ö', ':MinimapToggle<CR>', {})
-
 map('n', '<leader>t', ':FloatermToggle<CR>', {})
 
 map('t', '<Esc>', '<C-\\><C-n>', {})
 
-vim.keymap.set('n', '<leader>rb', function()
+vim.keymap.set('n', '<leader>w', function()
   require('reach').buffers({
     auto_handles = vim.split('jfkdlshgurnciemxow', '')
   })
