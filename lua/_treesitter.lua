@@ -9,4 +9,8 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 
-require'nvim-treesitter.install'.compilers = { "clang++", "gcc" }
+if vim.loop.os_uname().sysname == 'Linux' then
+  require'nvim-treesitter.install'.compilers = { "gcc" }
+else
+  require'nvim-treesitter.install'.compilers = { "clang" }
+end

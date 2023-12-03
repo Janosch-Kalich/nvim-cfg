@@ -23,6 +23,7 @@ require('_webtools')
 require('_numb')
 require('_reach')
 require('_knap')
+require('_oil')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'
@@ -124,5 +125,7 @@ vim.keymap.set('n', '<leader>w', function()
 end, {})
 
 vim.keymap.set({ 'n', 'v', 'i' },'<F5>', function() require("knap").process_once() end)
+
+vim.keymap.set({'n'}, '<leader>o', '<cmd>:Oil --float<CR>')
 
 require'alpha'.setup(require'alpha.themes.startify'.config)

@@ -96,5 +96,11 @@ require('lazy').setup({
     'aserowy/tmux.nvim',
     config = function () return require('tmux').setup() end,
     cond = function () return vim.loop.os_uname().sysname == 'Linux' end
+  },
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = { "nvim-tree/nvim-web-devicons" },
   }
 })
