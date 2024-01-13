@@ -24,6 +24,7 @@ require('_numb')
 require('_reach')
 require('_knap')
 require('_oil')
+require('_formatter')
 
 if vim.g.neovide then
     vim.o.guifont = 'CaskaydiaCove NF'

@@ -102,5 +102,6 @@ require('lazy').setup({
     opts = {},
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
-  }
+  },
+  'mhartington/formatter.nvim'
 })
