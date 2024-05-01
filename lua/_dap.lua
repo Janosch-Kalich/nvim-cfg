@@ -44,9 +44,12 @@ else
       detached = false,
     }
   }
+
+  dap.adapters.haskell = {
+    type = "executable",
+    command = vim.fn.stdpath("data") .. "/mason/bin/haskell-debug-adapter",
+  }
 end
-
-
 
 dap.configurations.cpp = {
   --[[{
@@ -104,3 +107,20 @@ dap.configurations.cpp = {
 
 dap.configurations.rust = dap.configurations.cpp
 dap.configurations.c = dap.configurations.cpp
+
+dap.configurations.haskell = {
+  {
+    name = 'Launch (haskell-debug-adapter)',
+    type = 'haskell',
+    request = 'launch',
+    startup = '${file}',
+    workspace = '${workspaceFolder}',
+    stopOnEntry = true,
+    logFile = vim.fn.stdpath('data') .. '/haskell-dap.log',
+    logLevel = 'WARNING',
+    ghciEnv = vim.empty_dict(),
+    ghciPrompt = "λ: ",
+    ghciInitialPrompt = "λ: ",
+    ghciCmd= "stack ghci --test --no-load --no-build --main-is TARGET --ghci-options -fprint-evld-with-show",
+  }
+}

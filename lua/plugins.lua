@@ -18,6 +18,10 @@ require('lazy').setup({
       require'alpha'.setup(require'alpha.themes.dashboard'.config)
     end
   },
+  'pysan3/pathlib.nvim',
+  'nvim-neorg/lua-utils.nvim',
+  'nvim-neotest/nvim-nio',
+  'vhyrro/luarocks.nvim',
   'williamboman/mason.nvim',
   'williamboman/mason-lspconfig.nvim',
   'neovim/nvim-lspconfig',
@@ -53,7 +57,6 @@ require('lazy').setup({
     tag = 'legacy'
   },
   'akinsho/flutter-tools.nvim',
-  'rest-nvim/rest.nvim',
   'ray-x/web-tools.nvim',
   'yamatsum/nvim-cursorline',
   'smoka7/hop.nvim',
@@ -73,6 +76,12 @@ require('lazy').setup({
   'toppair/reach.nvim',
   'frabjous/knap',
   {
+    'jbyuki/nabla.nvim',
+    config = function()
+      require('nabla').enable_virt()
+    end
+  },
+  {
     'nvim-neorg/neorg',
     config = function()
       require('neorg').setup {
@@ -85,7 +94,7 @@ require('lazy').setup({
                 notes = vim.env.NOTES_DIR,
               }
             }
-          }
+          },
         }
       }
     end,
@@ -103,5 +112,43 @@ require('lazy').setup({
     -- Optional dependencies
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
-  'mhartington/formatter.nvim'
+  'mhartington/formatter.nvim',
+  {
+    'RaafatTurki/hex.nvim',
+    config = function () return require('hex').setup() end
+  },
+  {
+    'https://gitlab.com/itaranto/plantuml.nvim',
+    version = '*',
+    config = function() require('plantuml').setup {
+        renderer = {
+          type = 'image',
+          options = {
+            prog = 'feh',
+            dark_mode = true,
+          }
+        },
+    } end,
+  },
+  {
+    'nvim-java/nvim-java',
+    dependencies = {
+      'nvim-java/lua-async-await',
+      'nvim-java/nvim-java-core',
+      'nvim-java/nvim-java-test',
+      'nvim-java/nvim-java-dap',
+      'MunifTanjim/nui.nvim',
+      'neovim/nvim-lspconfig',
+      'mfussenegger/nvim-dap',
+      {
+        'williamboman/mason.nvim',
+        opts = {
+          registries = {
+            'github:nvim-java/mason-registry',
+            'github:mason-org/mason-registry',
+          }
+        }
+      }
+    }
+  }
 })
