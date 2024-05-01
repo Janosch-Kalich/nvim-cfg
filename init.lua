@@ -56,6 +56,8 @@ autocmd('VimLeave', {
   end
 })]]--
 
+autocmd('BufReadPre', { pattern = '*.fasm', command = 'silent let g:asmsyntax = "fasm"'})
+
 vim.g.vimtex_view_method = "mupdf"
  
 vim.g.mapleader = ' '
