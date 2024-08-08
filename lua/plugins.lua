@@ -60,12 +60,6 @@ require('lazy').setup({
   'ray-x/web-tools.nvim',
   'yamatsum/nvim-cursorline',
   'smoka7/hop.nvim',
-  {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-    config = function()
-      require("lsp_lines").setup()
-    end,
-  },
   'windwp/nvim-autopairs',
   'lukas-reineke/indent-blankline.nvim';
   {
@@ -129,6 +123,9 @@ require('lazy').setup({
     config = function () return require('hex').setup() end
   },
   {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
+  },
+  {
     'https://gitlab.com/itaranto/plantuml.nvim',
     version = '*',
     config = function() require('plantuml').setup {
@@ -149,6 +146,7 @@ require('lazy').setup({
       'nvim-java/nvim-java-core',
       'nvim-java/nvim-java-test',
       'nvim-java/nvim-java-dap',
+      'nvim-java/nvim-java-refactor',
       'MunifTanjim/nui.nvim',
       'neovim/nvim-lspconfig',
       'mfussenegger/nvim-dap',
@@ -162,5 +160,9 @@ require('lazy').setup({
         }
       }
     }
+  },
+  {
+    'https://codeberg.org/esensar/nvim-dev-container',
+    dependencies = 'nvim-treesitter/nvim-treesitter'
   }
 })
