@@ -60,7 +60,12 @@ require('lazy').setup({
   'ray-x/web-tools.nvim',
   'yamatsum/nvim-cursorline',
   'smoka7/hop.nvim',
-  'Maan2003/lsp_lines.nvim',
+  {
+    "https://git.sr.ht/~whynothugo/lsp_lines.nvim",
+    config = function()
+      require("lsp_lines").setup()
+    end,
+  },
   'windwp/nvim-autopairs',
   'lukas-reineke/indent-blankline.nvim';
   {
@@ -110,12 +115,15 @@ require('lazy').setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
   'mhartington/formatter.nvim',
-  --[[{
+  {
     'mrcjkb/haskell-tools.nvim',
     version = '^3', -- Recommended
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
-  }]]--
-  'fedorenchik/fasm.vim'
+    config = function()
+      local ht = require('haskell-tools')
+    end
+  },
+  'fedorenchik/fasm.vim',
   {
     'RaafatTurki/hex.nvim',
     config = function () return require('hex').setup() end
@@ -136,6 +144,7 @@ require('lazy').setup({
   {
     'nvim-java/nvim-java',
     dependencies = {
+      'nvim-java/nvim-java-refactor',
       'nvim-java/lua-async-await',
       'nvim-java/nvim-java-core',
       'nvim-java/nvim-java-test',
