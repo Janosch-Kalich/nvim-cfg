@@ -25,9 +25,10 @@ require('_reach')
 require('_knap')
 require('_oil')
 require('_formatter')
+require('_dev_container')
 
 if vim.g.neovide then
-    vim.o.guifont = 'CaskaydiaCove NF'
+    vim.o.guifont = 'CommitMono'
     vim.g.neovide_scale_factor = 1
     vim.g.neovide_refresh_rate = 300
     vim.g.neovide_padding_top = 0
@@ -129,6 +130,8 @@ end, {})
 
 vim.keymap.set({ 'n', 'v', 'i' },'<F5>', function() require("knap").process_once() end)
 
-vim.keymap.set({'n'}, '<leader>o', '<cmd>:Oil --float<CR>')
+vim.keymap.set({'n'}, '<leader>o', '<cmd>:Oil<CR>')
+
+vim.keymap.set({'n'}, '<leader>nv', function() require('nabla').toggle_virt() end)
 
 require'alpha'.setup(require'alpha.themes.startify'.config)
