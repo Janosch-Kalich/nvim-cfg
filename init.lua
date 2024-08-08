@@ -28,16 +28,16 @@ require('_formatter')
 require('_dev_container')
 
 if vim.g.neovide then
-    vim.o.guifont = 'CommitMono'
-    vim.g.neovide_scale_factor = 1
-    vim.g.neovide_refresh_rate = 300
-    vim.g.neovide_padding_top = 0
-    vim.g.neovide_padding_left = 10
-    vim.g.neovide_padding_right = 0
-    vim.g.neovide_padding_bottom = 0
-    vim.g.neovide_no_idle = true
-    --vim.g.neovide_fullscreen = true
-    --vim.g.neovide_profiler = true
+  vim.o.guifont = 'CommitMono'
+  vim.g.neovide_scale_factor = 1
+  vim.g.neovide_refresh_rate = 300
+  vim.g.neovide_padding_top = 0
+  vim.g.neovide_padding_left = 10
+  vim.g.neovide_padding_right = 0
+  vim.g.neovide_padding_bottom = 0
+  vim.g.neovide_no_idle = true
+  --vim.g.neovide_fullscreen = true
+  --vim.g.neovide_profiler = true
 end
 
 vim.opt.shiftwidth = 2
@@ -60,7 +60,7 @@ autocmd('VimLeave', {
 autocmd('BufReadPre', { pattern = '*.fasm', command = 'silent let g:asmsyntax = "fasm"'})
 
 vim.g.vimtex_view_method = "mupdf"
- 
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 

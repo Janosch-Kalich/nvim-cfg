@@ -21,6 +21,5 @@ require("formatter").setup {
     tex = {
       require("formatter.filetypes.tex").latexindent
     }
-
   }
 }
