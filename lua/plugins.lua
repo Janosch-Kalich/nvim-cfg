@@ -1,141 +1,48 @@
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
     lazypath,
   })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup({
-  {
-    'goolord/alpha-nvim',
-    config = function ()
-      require'alpha'.setup(require'alpha.themes.dashboard'.config)
-    end
-  },
-  'pysan3/pathlib.nvim',
-  'nvim-neorg/lua-utils.nvim',
-  'nvim-neotest/nvim-nio',
-  'vhyrro/luarocks.nvim',
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
-  'neovim/nvim-lspconfig',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-path',
-  'hrsh7th/cmp-cmdline',
-  'hrsh7th/nvim-cmp',
-  'L3MON4D3/LuaSnip',
-  'saadparwaiz1/cmp_luasnip',
-  'nvim-treesitter/nvim-treesitter',
-  'EdenEast/nightfox.nvim',
-  'nvim-lualine/lualine.nvim',
-  'nvim-lua/plenary.nvim',
-  'Shatur/neovim-session-manager',
-  'nvim-tree/nvim-tree.lua',
-  'nvim-telescope/telescope.nvim',
-  'mfussenegger/nvim-dap',
-  'jay-babu/mason-nvim-dap.nvim',
-  'rcarriga/nvim-dap-ui',
-  'lewis6991/gitsigns.nvim',
-  'nvim-tree/nvim-web-devicons',
-  'romgrk/barbar.nvim',
-  'voldikss/vim-floaterm',
-  'natecraddock/workspaces.nvim',
-  'jubnzv/virtual-types.nvim',
+require('lazy').setup {
+  -- !!!
   'stevearc/aerial.nvim',
-  'ldelossa/litee.nvim',
-  'ldelossa/litee-bookmarks.nvim',
-  'ldelossa/litee-symboltree.nvim',
+  --
+  'goolord/alpha-nvim',
+  'romgrk/barbar.nvim',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-cmdline',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-path',
+  'saadparwaiz1/cmp_luasnip',
   {
-    'j-hui/fidget.nvim',
-    tag = 'legacy'
-  },
-  'akinsho/flutter-tools.nvim',
-  'ray-x/web-tools.nvim',
-  'yamatsum/nvim-cursorline',
-  'smoka7/hop.nvim',
-  'windwp/nvim-autopairs',
-  {
-    'iamcco/markdown-preview.nvim',
-    run = function() vim.fn['mkdp#util#install']() end,
-  },
-  'lervag/vimtex',
-  'normen/vim-pio',
-  'nacro90/numb.nvim',
-  'toppair/reach.nvim',
-  'frabjous/knap',
-  {
-    'jbyuki/nabla.nvim',
-    config = function()
-      -- require('nabla').enable_virt()
-    end
-  },
-  {
-    'nvim-neorg/neorg',
-    config = function()
-      require('neorg').setup {
-        load = {
-          ['core.defaults'] = {}, -- Loads default behaviour
-          ['core.concealer'] = {}, -- Adds pretty icons to your documents
-          ['core.dirman'] = { -- Manages Neorg workspaces
-            config = {
-              workspaces = {
-                notes = vim.env.NOTES_DIR,
-              }
-            }
-          },
-        }
-      }
-    end,
-    dependencies = 'nvim-lua/plenary.nvim'
-  },
-  'mfussenegger/nvim-jdtls',
-  {
-    'aserowy/tmux.nvim',
-    config = function () return require('tmux').setup() end,
-    cond = function () return vim.loop.os_uname().sysname == 'Linux' end
-  },
-  {
-    'stevearc/oil.nvim',
-    opts = {},
-    -- Optional dependencies
-    dependencies = { "nvim-tree/nvim-web-devicons" },
-  },
-  'mhartington/formatter.nvim',
-  {
-    'mrcjkb/haskell-tools.nvim',
-    version = '^3', -- Recommended
-    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' },
-    config = function()
-      local ht = require('haskell-tools')
-    end
+    'stevearc/dressing.nvim',
+    opts = {}
   },
   'fedorenchik/fasm.vim',
+  'j-hui/fidget.nvim',
+  'akinsho/flutter-tools.nvim',
+  -- !!!
+  'lewis6991/gitsigns.nvim',
+  --
   {
-    'RaafatTurki/hex.nvim',
-    config = function () return require('hex').setup() end
+    'mrcjkb/haskell-tools.nvim',
+    version = '^3',
+    ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' }
   },
+  'RaafatTurki/hex.nvim',
+  'smoka7/hop.nvim',
   {
-    "https://git.sr.ht/~whynothugo/lsp_lines.nvim"
-  },
-  {
-    'https://gitlab.com/itaranto/plantuml.nvim',
-    version = '*',
-    config = function() require('plantuml').setup {
-      renderer = {
-        type = 'image',
-        options = {
-          prog = 'feh',
-          dark_mode = true,
-        }
-      },
-    } end,
+    'lukas-reineke/indent-blankline.nvim',
+    main = 'ibl',
+    opts = {}
   },
   {
     'nvim-java/nvim-java',
@@ -154,25 +61,58 @@ require('lazy').setup({
         opts = {
           registries = {
             'github:nvim-java/mason-registry',
-            'github:mason-org/mason-registry',
+            'github:mason-org/mason-registry'
           }
         }
       }
     }
   },
+  'frabjous/knap',
+  -- !!!
+  'ldelossa/litee.nvim',
+  'ldelossa/litee-bookmarks.nvim',
+  'ldelossa/litee-symboltree.nvim',
+  ---
+  'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+  'nvim-neorg/lua-utils.nvim',
+  'nvim-lualine/lualine.nvim',
+  'vhyrro/luarocks.nvim',
+  'L3MON4D3/LuaSnip',
   {
-    'https://codeberg.org/esensar/nvim-dev-container',
-    dependencies = 'nvim-treesitter/nvim-treesitter'
+    'iamcco/markdown-preview.nvim',
+    run = vim.fn['mkdp#util#install']
   },
+  'williamboman/mason.nvim',
+  'williamboman/mason-lspconfig.nvim',
+  'jay-babu/mason-nvim-dap.nvim',
+  'jbyuki/nabla.nvim',
+  'nvim-neorg/neorg',
+  'Shatur/neovim-session-manager',
+  'nacro90/numb.nvim',
+  'EdenEast/nightfox.nvim',
+  'hrsh7th/nvim-cmp',
+  'yamatsum/nvim-cursorline',
+  'mfussenegger/nvim-dap',
+  'rcarriga/nvim-dap-ui',
+  'neovim/nvim-lspconfig',
+  'nvim-neotest/nvim-nio',
+  'nvim-treesitter/nvim-treesitter',
   {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
+    'stevearc/oil.nvim',
     opts = {},
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
-  {
-    'stevearc/dressing.nvim',
-    opts = {},
-  }
-})
+  'pysan3/pathlib.nvim',
+  'https://gitlab.com/itaranto/plantuml.nvim',
+  'nvim-lua/plenary.nvim',
+  'toppair/reach.nvim',
+  'rest-nvim/rest.nvim',
+  'nvim-telescope/telescope.nvim',
+  'voldikss/vim-floaterm',
+  'normen/vim-pio',
+  'lervag/vimtex',
+  -- ???
+  -- 'jubnzv/virtual-types.nvim',
+  --
+  'natecraddock/workspaces.nvim'
+}

@@ -1,0 +1,9 @@
+{
+  "diagnostics.disable": [
+    "undefined-global",
+    "trailing-space",
+    "redefined-local",
+    "redefined-label"
+  ],
+  "workspace.checkThirdParty": false
+}

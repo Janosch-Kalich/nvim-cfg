@@ -1,31 +1,105 @@
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
+local os = vim.loop.os_uname().sysname
+
+-- REQUIRES {{{1
 
 require('plugins')
+
+local aerial = require('aerial')
+local alpha = require('alpha')
+local alpha_themes_startify = require('alpha.themes.startify')
+local barbar = require('barbar')
+local cmp = require('cmp')
+local cursorline = require('nvim-cursorline')
+local dap = require('dap')
+local dapui = require('dapui')
+local fidget = require('fidget')
+local flutter_tools = require('flutter-tools')
+local hex = require('hex')
+local hop = require('hop')
+local hop_hint = require('hop.hint')
+local java = require('java')
+local knap = require('knap')
+local mason = require('mason')
+local mason_lspconfig = require('mason-lspconfig')
+local mason_nvim_dap = require('mason-nvim-dap')
+local litee_bookmarks = require('litee.bookmarks')
+local litee_lib = require('litee.lib')
+local litee_symboltree = require('litee.symboltree')
+local lsp_lines = require('lsp_lines')
+local nable = require('nabla')
+local neorg = require('neorg')
+local nightfox = require('nightfox')
+local numb = require('numb')
+local oil = require('oil')
+local plantuml = require('plantuml')
+local reach = require('reach')
+local session_manager = require('session_manager')
+local telescope = require('telescope')
+local telescope_builtin = require('telescope.builtin')
+local treesitter_configs = require('nvim-treesitter.configs')
+local treesitter_install = require('nvim-treesitter.install')
+local workspaces = require('workspaces')
+
+local cfg = require('cfg')
+local dap_cfg = require('_dap')
+
+-- }}}
+
+-- vim.g {{{1
+
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.vimtex_view_method = 'mupdf'
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ','
+vim.g.knap_settings = cfg.knap
+vim.g.floaterm_shell = cfg.floaterm_shell[os]
+
+-- }}}
+
+-- SETUP {{{1
+
 require('_lsp')
-require('_cmp')
-require('_treesitter')
-require('_theme')
-require('_lualine')
-require('_session_manager')
-require('_helper')
-require('_tree')
-require('_telescope')
-require('_dap')
-require('_tabs')
-require('_workspaces')
-require('_aerial')
-require('_litee')
--- require('_http')
-require('_hop')
-require('_autopairs')
-require('_webtools')
-require('_numb')
-require('_reach')
-require('_knap')
-require('_oil')
-require('_formatter')
-require('_dev_container')
+dap_cfg[os]()
+
+aerial.setup(cfg.aerial)
+alpha.setup(alpha_themes_startify.config)
+barbar.setup(cfg.barbar)
+cmp.setup(cfg.cmp)
+cursorline.setup(cfg.cursorline)
+dapui.setup()
+fidget.setup()
+flutter_tools.setup()
+hex.setup()
+hop.setup(cfg.hop)
+java.setup()
+mason.setup()
+mason_lspconfig.setup()
+mason_nvim_dap.setup(cfg.mason_nvim_dap)
+litee_bookmarks.setup()
+litee_lib.setup()
+litee_symboltree.setup()
+lsp_lines.setup()
+neorg.setup(cfg.neorg)
+nightfox.setup(cfg.nightfox)
+numb.setup()
+oil.setup(cfg.oil)
+plantuml.setup(cfg.plantuml)
+reach.setup(cfg.reach)
+session_manager.setup(cfg.session_manager)
+telescope.setup()
+treesitter_configs.setup(cfg.treesitter_configs)
+treesitter_install.compilers = cfg.treesitter_install_compilers[os]
+workspaces.setup(cfg.workspaces)
+
+telescope.load_extension('workspaces')
+telescope.load_extension('aerial')
+
+require('bubbles')
+
+-- }}}
+
+-- NEOVIDE {{{1
 
 if vim.g.neovide then
   vim.o.guifont = 'CommitMono'
@@ -40,97 +114,125 @@ if vim.g.neovide then
   --vim.g.neovide_profiler = true
 end
 
+-- }}}
+
+-- vim.opt {{{1
+
 vim.opt.shiftwidth = 2
-vim.wo.number = true
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
+vim.opt.foldmethod = 'marker'
+
+-- }}}
+
+-- vim.wo {{{1
+
 vim.wo.relativenumber = true
+vim.wo.number = true
 
+--- }}}
 
-local augroup = vim.api.nvim_create_augroup
-local autocmd = vim.api.nvim_create_autocmd
---[[autocmd('VimEnter', { pattern = '*', command = 'silent !tmux set status off' })
-autocmd('VimLeave', {
-  pattern = '*',
-  callback = function()
-    vim.fn.jobstart('tmux set status on', { detach = true })
-  end
-})]]--
+vim.cmd('colorscheme carbonfox')
 
-autocmd('BufReadPre', { pattern = '*.fasm', command = 'silent let g:asmsyntax = "fasm"'})
+vim.filetype.add {
+  extension = {
+    fasm = 'fasm'
+  }
+}
 
-vim.g.vimtex_view_method = "mupdf"
+vim.diagnostic.config({
+  virtual_text = false
+})
 
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ','
+-- KEYMAPS {{{1
 
-if (vim.loop.os_uname().sysname == 'Linux') then
-  vim.g.floaterm_shell = 'fish'
-elseif (vim.loop.os_uname().sysname == 'Windows') then
-  vim.g.floaterm_shell = 'pwsh'
-end
+-- Telescope {{{2
+vim.keymap.set('n', '<leader>a', telescope_builtin.find_files)
+vim.keymap.set('n', '<leader>y', telescope_builtin.live_grep)
+vim.keymap.set('n', '<leader>e', "<Cmd>Telescope workspaces<CR>")
+-- }}}
 
-local builtin = require('telescope.builtin')
-local dap = require('dap')
-local dap_ui = require('dapui')
-local hop = require('hop')
-local directions = require('hop.hint').HintDirection
+-- DAP {{{2
+vim.keymap.set('n', '<leader>l', dap.continue)
+vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+vim.keymap.set('n', '<leader>k', dap.step_over)
+vim.keymap.set('n', '<leader>j', dap.step_into)
+vim.keymap.set('n', '<leader>m', dapui.toggle)
+-- }}}
 
-vim.keymap.set('n', '<leader>a', builtin.find_files, {})
-vim.keymap.set('n', '<leader>y', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>e', "<Cmd>Telescope workspaces<CR>", {})
-vim.keymap.set('n', '<leader>l', dap.continue, {})
-vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint, {})
-vim.keymap.set('n', '<leader>k', dap.step_over, {})
-vim.keymap.set('n', '<leader>j', dap.step_into, {})
-vim.keymap.set('n', '<leader>m', dap_ui.toggle, {})
-vim.keymap.set('n', '<leader>ss', vim.lsp.buf.hover, {})
-vim.keymap.set('n', '<leader>dd', vim.lsp.buf.declaration, {})
-vim.keymap.set('n', '<leader>rr', vim.lsp.buf.references, {})
+-- LSP {{{2
+vim.keymap.set('n', '<leader>ss', vim.lsp.buf.hover)
+vim.keymap.set('n', '<leader>dd', vim.lsp.buf.declaration)
+vim.keymap.set('n', '<leader>rr', vim.lsp.buf.references)
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+-- }}}
 
-vim.keymap.set('n', '<leader>x', '<cmd>AerialToggle!<CR>', {})
-vim.keymap.set('n', '<leader>rn', '<Plug>RestNvim<CR>', {})
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})
+-- Aerial {{{2
+vim.keymap.set('n', '<leader>x', '<cmd>AerialToggle!<CR>')
+-- }}}
 
-vim.keymap.set('', '<leader>hw', hop.hint_words, {})
-vim.keymap.set('', '<leader>he', '<Cmd>lua require(\'hop\').hint_words({ hint_position = require(\'hop.hint\').HintPosition.END })<CR>', {})
-vim.keymap.set('', '<leader>hl', hop.hint_lines_skip_whitespace, {})
-vim.keymap.set('', '<leader>ha', hop.hint_anywhere, {})
-vim.keymap.set('', '<leader>hp', hop.hint_patterns, {})
+-- Rest {{{2
+vim.keymap.set('n', '<leader>rn', '<Plug>RestNvim<CR>')
+-- }}}
 
-map('n', '<C-Tab>', '<Cmd>BufferNext<CR>', {})
-map('n', '<C-S-Tab>', '<Cmd>BufferPrevious<CR>', {})
-map('n', '<A-w>', '<Cmd>BufferClose<CR>', {})
-map('n', '<A-1>', '<Cmd>BufferGoto 1<CR>', {})
-map('n', '<A-2>', '<Cmd>BufferGoto 2<CR>', {})
-map('n', '<A-3>', '<Cmd>BufferGoto 3<CR>', {})
-map('n', '<A-4>', '<Cmd>BufferGoto 4<CR>', {})
-map('n', '<A-5>', '<Cmd>BufferGoto 5<CR>', {})
-map('n', '<A-6>', '<Cmd>BufferGoto 6<CR>', {})
-map('n', '<A-7>', '<Cmd>BufferGoto 7<CR>', {})
-map('n', '<A-8>', '<Cmd>BufferGoto 8<CR>', {})
-map('n', '<A-9>', '<Cmd>BufferGoto 9<CR>', {})
-map('n', '<A-0>', '<Cmd>BufferGoto 10<CR>', {})
-map('n', '<leader>p', '<Cmd>BufferPick<CR>', {})
+-- Hop {{{2
+vim.keymap.set('', '<leader>hw', hop.hint_words)
+vim.keymap.set('', '<leader>he', function()
+  hop.hint_words {
+    hint_position = hop_hint.HintPosition.END
+  }
+end)
+vim.keymap.set('', '<leader>hl', hop.hint_lines_skip_whitespace)
+vim.keymap.set('', '<leader>ha', hop.hint_anywhere)
+vim.keymap.set('', '<leader>hp', hop.hint_patterns)
+-- }}}
 
-map('n', '<leader>q', ':NvimTreeToggle<CR>', {})
+-- Tab {{{2
+vim.keymap.set({'n'}, '<C-Tab>', '<Cmd>BufferNext<CR>')
+vim.keymap.set({'n'}, '<C-S-Tab>', '<Cmd>BufferPrevious<CR>')
+vim.keymap.set({'n'}, '<A-w>', '<Cmd>BufferClose<CR>')
+vim.keymap.set({'n'}, '<A-1>', '<Cmd>BufferGoto 1<CR>')
+vim.keymap.set({'n'}, '<A-2>', '<Cmd>BufferGoto 2<CR>')
+vim.keymap.set({'n'}, '<A-3>', '<Cmd>BufferGoto 3<CR>')
+vim.keymap.set({'n'}, '<A-4>', '<Cmd>BufferGoto 4<CR>')
+vim.keymap.set({'n'}, '<A-5>', '<Cmd>BufferGoto 5<CR>')
+vim.keymap.set({'n'}, '<A-6>', '<Cmd>BufferGoto 6<CR>')
+vim.keymap.set({'n'}, '<A-7>', '<Cmd>BufferGoto 7<CR>')
+vim.keymap.set({'n'}, '<A-8>', '<Cmd>BufferGoto 8<CR>')
+vim.keymap.set({'n'}, '<A-9>', '<Cmd>BufferGoto 9<CR>')
+vim.keymap.set({'n'}, '<A-0>', '<Cmd>BufferGoto 10<CR>')
+vim.keymap.set({'n'}, '<leader>p', '<Cmd>BufferPick<CR>')
+-- }}}
 
-map('n', '<leader>t', ':FloatermToggle<CR>', {})
+-- Tree {{{3
+vim.keymap.set({'n'}, '<leader>q', ':NvimTreeToggle<CR>')
 
-map('t', '<Esc>', '<C-\\><C-n>', {})
+-- Floaterm
+vim.keymap.set({'n'}, '<leader>t', ':FloatermToggle<CR>')
+vim.keymap.set({'t'}, '<Esc>', '<C-\\><C-n>')
 
+-- Reach
 vim.keymap.set('n', '<leader>w', function()
-  require('reach').buffers({
+  reach.buffers {
     auto_handles = vim.split('jfkdlshgurnciemxow,ypq.<', '')
-  })
-end, {})
+  }
+end)
+-- }}}
 
-vim.keymap.set({ 'n', 'v', 'i' },'<F5>', function() require("knap").process_once() end)
+-- Knap {{{2
+vim.keymap.set({ 'n', 'v', 'i' },'<F5>', knap.process_once)
+-- }}}
 
+-- Oil {{{2
 vim.keymap.set({'n'}, '<leader>o', '<cmd>:Oil<CR>')
+-- }}}
 
-vim.keymap.set({'n'}, '<leader>nv', function() require('nabla').toggle_virt() end)
+-- Nabla {{{2
+vim.keymap.set({'n'}, '<leader>nv', nable.toggle_virt)
+-- }}}
 
+-- Session manager {{{2
 vim.keymap.set({'n'}, '<leader><leader>', '<Cmd>SessionManager load_session<CR>')
+-- }}}
 
-require'alpha'.setup(require'alpha.themes.startify'.config)
+-- }}}
