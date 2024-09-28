@@ -61,7 +61,6 @@ require('lazy').setup({
   'yamatsum/nvim-cursorline',
   'smoka7/hop.nvim',
   'windwp/nvim-autopairs',
-  'lukas-reineke/indent-blankline.nvim';
   {
     'iamcco/markdown-preview.nvim',
     run = function() vim.fn['mkdp#util#install']() end,
@@ -74,7 +73,7 @@ require('lazy').setup({
   {
     'jbyuki/nabla.nvim',
     config = function()
-      require('nabla').enable_virt()
+      -- require('nabla').enable_virt()
     end
   },
   {
@@ -164,5 +163,16 @@ require('lazy').setup({
   {
     'https://codeberg.org/esensar/nvim-dev-container',
     dependencies = 'nvim-treesitter/nvim-treesitter'
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    ---@module "ibl"
+    ---@type ibl.config
+    opts = {},
+  },
+  {
+    'stevearc/dressing.nvim',
+    opts = {},
   }
 })

@@ -98,9 +98,6 @@ vim.keymap.set('', '<leader>hl', hop.hint_lines_skip_whitespace, {})
 vim.keymap.set('', '<leader>ha', hop.hint_anywhere, {})
 vim.keymap.set('', '<leader>hp', hop.hint_patterns, {})
 
-map('n', '<C-v>', '"+p', {})
-map('n', '<C-c>', '"+yi', {})
-
 map('n', '<C-Tab>', '<Cmd>BufferNext<CR>', {})
 map('n', '<C-S-Tab>', '<Cmd>BufferPrevious<CR>', {})
 map('n', '<A-w>', '<Cmd>BufferClose<CR>', {})
@@ -124,7 +121,7 @@ map('t', '<Esc>', '<C-\\><C-n>', {})
 
 vim.keymap.set('n', '<leader>w', function()
   require('reach').buffers({
-    auto_handles = vim.split('jfkdlshgurnciemxow', '')
+    auto_handles = vim.split('jfkdlshgurnciemxow,ypq.<', '')
   })
 end, {})
 
@@ -133,5 +130,7 @@ vim.keymap.set({ 'n', 'v', 'i' },'<F5>', function() require("knap").process_once
 vim.keymap.set({'n'}, '<leader>o', '<cmd>:Oil<CR>')
 
 vim.keymap.set({'n'}, '<leader>nv', function() require('nabla').toggle_virt() end)
+
+vim.keymap.set({'n'}, '<leader><leader>', '<Cmd>SessionManager load_session<CR>')
 
 require'alpha'.setup(require'alpha.themes.startify'.config)

@@ -1,3 +1,4 @@
+local config = require('config')
 local cmp = require('cmp')
 
 cmp.setup({
@@ -59,6 +60,22 @@ cmp.setup.cmdline(':', {
       lspconfig.ltex.setup ({
         filetypes = {
           "ltx", "tex", "md"
+        }
+      })
+    end,
+    ['tsserver'] = function()
+      lspconfig.tsserver.setup ({
+        init_options = {
+          plugins = {
+            {
+              name = "@vue/typescript-plugin",
+              location = config.typescript_plugin,
+              languages = {"javascript", "typescript", "vue"},
+            },
+          },
+        },
+        filetypes = {
+          "javascript", "typescript", "vue"
         }
       })
     end,

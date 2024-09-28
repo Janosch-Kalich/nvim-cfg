@@ -1,3 +1,4 @@
-plugin
-neovide_backtraces.log
-lazy-lock.json
+/plugin
+/neovide_backtraces.log
+/lazy-lock.json
+/config.lua
