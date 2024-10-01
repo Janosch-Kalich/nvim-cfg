@@ -55,9 +55,9 @@ local dap_cfg = {
   Linux = function()
     codelldb('codelldb')
   end,
-  Windows_NT = {
+  Windows_NT = function()
     codelldb('codelldb.cmd')
-  }
+  end
 }
 
 return dap_cfg

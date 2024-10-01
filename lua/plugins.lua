@@ -68,11 +68,6 @@ require('lazy').setup {
     }
   },
   'frabjous/knap',
-  -- !!!
-  'ldelossa/litee.nvim',
-  'ldelossa/litee-bookmarks.nvim',
-  'ldelossa/litee-symboltree.nvim',
-  ---
   'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
   'nvim-neorg/lua-utils.nvim',
   'nvim-lualine/lualine.nvim',

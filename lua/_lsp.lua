@@ -4,42 +4,42 @@ local lspconfig = require('lspconfig')
 
 local lsp_capabilities = cmp_nvim_lsp.default_capabilities()
 
-mason_lspconfig.setup_handlers({
+mason_lspconfig.setup_handlers {
   function(server_name)
-    lspconfig[server_name].setup({
+    lspconfig[server_name].setup {
       capabilities = lsp_capabilities,
-    })
+    }
   end,
   ['clangd'] = function()
-    lspconfig.clangd.setup ({
+    lspconfig.clangd.setup {
       filetypes = {
-        "c", "cpp", "objc", "objcpp", "cuda"
+        'c', 'cpp', 'objc', 'objcpp', 'cuda'
       }
-    })
+    }
   end,
   ['ltex'] = function()
-    lspconfig.ltex.setup ({
+    lspconfig.ltex.setup {
       filetypes = {
-        "ltx", "tex", "md"
+        'ltx', 'tex', 'md'
       }
-    })
-  end,
+    }
+  end
   --[[
   ['tsserver'] = function()
     lspconfig.tsserver.setup ({
       init_options = {
         plugins = {
           {
-            name = "@vue/typescript-plugin",
+            name = '@vue/typescript-plugin',
             location = config.typescript_plugin,
-            languages = {"javascript", "typescript", "vue"},
+            languages = {'javascript', 'typescript', 'vue'},
           },
         },
       },
       filetypes = {
-        "javascript", "typescript", "vue"
+        'javascript', 'typescript', 'vue'
       }
     })
   end,
   --]]
-})
+}

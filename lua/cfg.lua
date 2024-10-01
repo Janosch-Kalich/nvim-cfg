@@ -7,7 +7,7 @@ local cfg = {}
 
 -- NEORG {{{1
 cfg.neorg = {
-   load = {
+  load = {
     ['core.defaults'] = {},
     ['core.concealer'] = {},
     ['core.dirman'] = {
@@ -194,6 +194,7 @@ cfg.treesitter_install_compilers = {
 }
 -- }}}
 
+-- SESSION MANAGER {{{1
 cfg.session_manager = {
   sessions_dir = plenary_path:new(vim.fn.stdpath('data'), 'sessions'),
   path_replacer = '__',
@@ -209,5 +210,39 @@ cfg.session_manager = {
   autosave_only_in_session = false,
   max_path_length = 80,
 }
+-- }}}
+
+-- JAVA {{{1
+cfg.java = {
+  jdk = {
+    auto_install = false
+  }
+}
+-- }}}
+
+-- DAPUI {{{1
+cfg.dapui = {
+  layouts = {
+    {
+      elements = {
+        { id = "repl", size = 0.25 },
+        { id = "console", size = 0.75 }
+      },
+      size = 10,
+      position = "bottom"
+    },
+    {
+      elements = {
+        { id = "scopes", size = 0.25 },
+        { id = "breakpoints", size = 0.25 },
+        { id = "stacks", size = 0.25 },
+        { id = "watches", size = 0.25 }
+      },
+      size = 40,
+      position = "left"
+    }
+  }
+}
+-- }}}
 
 return cfg

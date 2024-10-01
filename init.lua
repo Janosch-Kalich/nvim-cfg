@@ -22,9 +22,6 @@ local knap = require('knap')
 local mason = require('mason')
 local mason_lspconfig = require('mason-lspconfig')
 local mason_nvim_dap = require('mason-nvim-dap')
-local litee_bookmarks = require('litee.bookmarks')
-local litee_lib = require('litee.lib')
-local litee_symboltree = require('litee.symboltree')
 local lsp_lines = require('lsp_lines')
 local nable = require('nabla')
 local neorg = require('neorg')
@@ -59,7 +56,6 @@ vim.g.floaterm_shell = cfg.floaterm_shell[os]
 
 -- SETUP {{{1
 
-require('_lsp')
 dap_cfg[os]()
 
 aerial.setup(cfg.aerial)
@@ -67,7 +63,7 @@ alpha.setup(alpha_themes_startify.config)
 barbar.setup(cfg.barbar)
 cmp.setup(cfg.cmp)
 cursorline.setup(cfg.cursorline)
-dapui.setup()
+dapui.setup(cfg.dapui)
 fidget.setup()
 flutter_tools.setup()
 hex.setup()
@@ -76,9 +72,6 @@ java.setup()
 mason.setup()
 mason_lspconfig.setup()
 mason_nvim_dap.setup(cfg.mason_nvim_dap)
-litee_bookmarks.setup()
-litee_lib.setup()
-litee_symboltree.setup()
 lsp_lines.setup()
 neorg.setup(cfg.neorg)
 nightfox.setup(cfg.nightfox)
@@ -96,6 +89,7 @@ telescope.load_extension('workspaces')
 telescope.load_extension('aerial')
 
 require('bubbles')
+require('_lsp')
 
 -- }}}
 
@@ -147,9 +141,10 @@ vim.diagnostic.config({
 -- KEYMAPS {{{1
 
 -- Telescope {{{2
-vim.keymap.set('n', '<leader>a', telescope_builtin.find_files)
-vim.keymap.set('n', '<leader>y', telescope_builtin.live_grep)
-vim.keymap.set('n', '<leader>e', "<Cmd>Telescope workspaces<CR>")
+vim.keymap.set('n', '<leader><leader>f', telescope_builtin.find_files)
+vim.keymap.set('n', '<leader><leader>l', telescope_builtin.live_grep)
+vim.keymap.set('n', '<leader><leader>w', "<Cmd>Telescope workspaces<CR>")
+vim.keymap.set('n', '<leader><leader>a', "<Cmd>Telescope aerial<CR>")
 -- }}}
 
 -- DAP {{{2
@@ -157,14 +152,20 @@ vim.keymap.set('n', '<leader>l', dap.continue)
 vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
 vim.keymap.set('n', '<leader>k', dap.step_over)
 vim.keymap.set('n', '<leader>j', dap.step_into)
-vim.keymap.set('n', '<leader>m', dapui.toggle)
+vim.keymap.set('n', '<leader>da', dapui.toggle)
+vim.keymap.set('n', '<leader>dj', function()
+  dapui.toggle(1)
+end)
+vim.keymap.set('n', '<leader>dh', function()
+  dapui.toggle(2)
+end)
 -- }}}
 
 -- LSP {{{2
-vim.keymap.set('n', '<leader>ss', vim.lsp.buf.hover)
-vim.keymap.set('n', '<leader>dd', vim.lsp.buf.declaration)
-vim.keymap.set('n', '<leader>rr', vim.lsp.buf.references)
-vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
+vim.keymap.set('n', '<localleader>h', vim.lsp.buf.hover)
+vim.keymap.set('n', '<localleader>d', vim.lsp.buf.definition)
+vim.keymap.set('n', '<localleader>r', vim.lsp.buf.references)
+vim.keymap.set('n', '<localleader>c', vim.lsp.buf.code_action)
 -- }}}
 
 -- Aerial {{{2
@@ -204,14 +205,12 @@ vim.keymap.set({'n'}, '<A-0>', '<Cmd>BufferGoto 10<CR>')
 vim.keymap.set({'n'}, '<leader>p', '<Cmd>BufferPick<CR>')
 -- }}}
 
--- Tree {{{3
-vim.keymap.set({'n'}, '<leader>q', ':NvimTreeToggle<CR>')
-
--- Floaterm
+-- Floaterm {{{2
 vim.keymap.set({'n'}, '<leader>t', ':FloatermToggle<CR>')
 vim.keymap.set({'t'}, '<Esc>', '<C-\\><C-n>')
+-- }}}
 
--- Reach
+-- Reach {{{2
 vim.keymap.set('n', '<leader>w', function()
   reach.buffers {
     auto_handles = vim.split('jfkdlshgurnciemxow,ypq.<', '')
@@ -232,7 +231,7 @@ vim.keymap.set({'n'}, '<leader>nv', nable.toggle_virt)
 -- }}}
 
 -- Session manager {{{2
-vim.keymap.set({'n'}, '<leader><leader>', '<Cmd>SessionManager load_session<CR>')
+vim.keymap.set({'n'}, '<leader>sm', '<Cmd>SessionManager load_session<CR>')
 -- }}}
 
 -- }}}
