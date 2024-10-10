@@ -1,3 +1,5 @@
+local os = vim.loop.os_uname().sysname
+
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -11,24 +13,62 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-require('lazy').setup {
+require('lazy').setup({
   -- !!!
-  'stevearc/aerial.nvim',
+  {
+    'stevearc/aerial.nvim',
+    event = 'VeryLazy',
+    config = function()
+      local telescope = require('telescope')
+      local aerial = require('aerial')
+
+      aerial.setup {
+        on_attach = function(bufnr)
+          vim.keymap.set('n', '<leader>N', '<cmd>AerialPrev<CR>', { buffer = bufnr })
+          vim.keymap.set('n', '<leader>n', '<cmd>AerialNext<CR>', { buffer = bufnr })
+        end
+      }
+
+      telescope.load_extension('aerial')
+    end,
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    }
+  },
   --
-  'goolord/alpha-nvim',
-  'romgrk/barbar.nvim',
-  'hrsh7th/cmp-buffer',
-  'hrsh7th/cmp-cmdline',
-  'hrsh7th/cmp-nvim-lsp',
-  'hrsh7th/cmp-path',
-  'saadparwaiz1/cmp_luasnip',
+  {
+    'romgrk/barbar.nvim',
+    event = 'VeryLazy',
+    opts = {
+      animation = true,
+      auto_hide = true,
+      tabpages = true,
+      clickable = true,
+      focus_on_close = 'previous',
+      hightlight_alternate = false,
+      hightlight_visible = false,
+      insert_at_end = true,
+      maximum_padding = 2,
+      icons = {
+        button = ''
+      }
+    }
+  },
   {
     'stevearc/dressing.nvim',
     opts = {}
   },
   'fedorenchik/fasm.vim',
-  'j-hui/fidget.nvim',
-  'akinsho/flutter-tools.nvim',
+  {
+    'j-hui/fidget.nvim',
+    event = 'VeryLazy',
+    opts = {}
+  },
+  {
+    'akinsho/flutter-tools.nvim',
+    ft = 'dart',
+    opts = {}
+  },
   -- !!!
   'lewis6991/gitsigns.nvim',
   --
@@ -37,8 +77,32 @@ require('lazy').setup {
     version = '^3',
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' }
   },
-  'RaafatTurki/hex.nvim',
-  'smoka7/hop.nvim',
+  {
+    'RaafatTurki/hex.nvim',
+    opts = {}
+  },
+  {
+    'smoka7/hop.nvim',
+    event = 'VeryLazy',
+    config = function()
+      local hop = require('hop')
+      local hop_hint = require('hop.hint')
+
+      hop.setup {
+        multi_windows = true
+      }
+
+      vim.keymap.set('', '<leader>hw', hop.hint_words)
+      vim.keymap.set('', '<leader>he', function()
+        hop.hint_words {
+          hint_position = hop_hint.HintPosition.END
+        }
+      end)
+      vim.keymap.set('', '<leader>hl', hop.hint_lines_skip_whitespace)
+      vim.keymap.set('', '<leader>ha', hop.hint_anywhere)
+      vim.keymap.set('', '<leader>hp', hop.hint_patterns)
+    end
+  },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = 'ibl',
@@ -46,6 +110,7 @@ require('lazy').setup {
   },
   {
     'nvim-java/nvim-java',
+    ft = 'java',
     dependencies = {
       'nvim-java/nvim-java-refactor',
       'nvim-java/lua-async-await',
@@ -67,47 +132,382 @@ require('lazy').setup {
       }
     }
   },
-  'frabjous/knap',
-  'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+  {
+    'frabjous/knap',
+    ft = { 'tex', 'ltx', 'md' },
+    init = function()
+      vim.g.knap_settings = {
+        texoutputtext = "pdf",
+        textopdf = "pdflatex -synctex=1 -halt-on-error -interaction=batchmode %docroot%",
+        textopdfviewerlaunch = "mupdf %outputfile%",
+        textopdfviewerrefresh = "kill -HUP %pid%"
+      }
+    end,
+    config = function()
+      local knap = require('knap')
+
+      vim.keymap.set({ 'n', 'v', 'i' },'<F5>', knap.process_once)
+    end
+  },
+  {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    event = 'VeryLazy',
+    opts = {}
+  },
   'nvim-neorg/lua-utils.nvim',
-  'nvim-lualine/lualine.nvim',
+  {
+    'nvim-lualine/lualine.nvim',
+    lazy = false,
+    config = function()
+      require('bubbles')
+    end
+  },
   'vhyrro/luarocks.nvim',
   'L3MON4D3/LuaSnip',
   {
     'iamcco/markdown-preview.nvim',
     run = vim.fn['mkdp#util#install']
   },
-  'williamboman/mason.nvim',
-  'williamboman/mason-lspconfig.nvim',
-  'jay-babu/mason-nvim-dap.nvim',
-  'jbyuki/nabla.nvim',
-  'nvim-neorg/neorg',
-  'Shatur/neovim-session-manager',
-  'nacro90/numb.nvim',
-  'EdenEast/nightfox.nvim',
-  'hrsh7th/nvim-cmp',
-  'yamatsum/nvim-cursorline',
-  'mfussenegger/nvim-dap',
-  'rcarriga/nvim-dap-ui',
-  'neovim/nvim-lspconfig',
+  {
+    'williamboman/mason.nvim',
+    cmd = 'Mason',
+    opts = {}
+  },
+  {
+    'jay-babu/mason-nvim-dap.nvim',
+    event = 'VeryLazy',
+    config = function()
+      local mason_nvim_dap = require('mason-nvim-dap')
+      mason_nvim_dap.setup {
+        handlers = {}
+      }
+    end
+  },
+  {
+    'jbyuki/nabla.nvim',
+    ft = 'md',
+    config = function()
+      local nable = require('nabla')
+      vim.keymap.set({'n'}, '<leader>nv', nable.toggle_virt)
+    end
+  },
+  {
+    "NeogitOrg/neogit",
+    event = "VeryLazy",
+    dependencies = {
+      "sindrets/diffview.nvim",        -- optional - Diff integration
+    },
+    config = true
+  },
+  {
+    'nvim-neorg/neorg',
+    cmd = 'Neorg',
+    opts = {
+      load = {
+        ['core.defaults'] = {},
+        ['core.concealer'] = {},
+        ['core.dirman'] = {
+          config = {
+            workspaces = {
+              notes = vim.env.NOTES_DIR
+            }
+          }
+        }
+      }
+    }
+  },
+  {
+    'Shatur/neovim-session-manager',
+    lazy = false,
+    config = function()
+      local plenary_path = require('plenary.path')
+      local session_manager = require('session_manager')
+      local session_manager_config = require('session_manager.config')
+
+      session_manager.setup {
+        sessions_dir = plenary_path:new(vim.fn.stdpath('data'), 'sessions'),
+        path_replacer = '__',
+        colon_replacer = '++',
+        autoload_mode = session_manager_config.AutoloadMode.CurrentDir,
+        autosave_last_session = true,
+        autosave_ignore_not_normal = true,
+        autosave_ignore_dirs = {},
+        autosave_ignore_filetypes = {
+          'gitcommit',
+        },
+        autosave_ignore_buftypes = {},
+        autosave_only_in_session = false,
+        max_path_length = 80,
+      }
+    end
+  },
+  {
+    'nacro90/numb.nvim',
+    event = 'VeryLazy',
+    opts = {}
+  },
+  {
+    'EdenEast/nightfox.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      local nightfox = require('nightfox')
+
+      nightfox.setup {
+        options = {
+          transparent = true
+        }
+      }
+
+      vim.cmd('colorscheme carbonfox')
+    end
+  },
+  {
+    'hrsh7th/nvim-cmp',
+    event = 'VeryLazy',
+    config = function()
+      local cmp = require('cmp')
+      local luasnip = require('luasnip')
+
+      cmp.setup {
+        snippet = {
+          expand = function(args)
+            luasnip.lsp_expand(args.body)
+          end,
+        },
+        window = {
+          documentation = cmp.config.window.bordered()
+        },
+        mapping = cmp.mapping.preset.insert {
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-j>'] = function()
+            if cmp.visible() then
+              cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
+            else
+              cmp.complete()
+            end
+          end,
+          ['<C-k>'] = function()
+            if cmp.visible() then
+              cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
+            else
+              cmp.complete()
+            end
+          end,
+          ['<C-h>'] = cmp.mapping.abort(),
+          ['<C-l>'] = cmp.mapping.confirm { select = true },
+        },
+        sources = cmp.config.sources {
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' }
+        }
+      }
+    end,
+    dependencies = {
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-cmdline',
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-path',
+      'saadparwaiz1/cmp_luasnip',
+    }
+  },
+  {
+    'yamatsum/nvim-cursorline',
+    event = 'VeryLazy',
+    opts = {
+      cursorline = {
+        enable = true,
+        timeout = 0,
+        number = false,
+      },
+      cursorword = {
+        enable = false,
+      }
+    }
+  },
+  {
+    'mfussenegger/nvim-dap',
+    event = 'VeryLazy',
+    config = function() 
+      local dap_cfg = require('_dap')
+
+      dap_cfg[os]()
+    end,
+    dependencies = {
+      {
+        'rcarriga/nvim-dap-ui',
+        config = function()
+          local dapui = require('dapui')
+          dapui.setup({
+            layouts = {
+              {
+                elements = {
+                  { id = "repl", size = 0.25 },
+                  { id = "console", size = 0.75 }
+                },
+                size = 10,
+                position = "bottom"
+              },
+              {
+                elements = {
+                  { id = "scopes", size = 0.25 },
+                  { id = "breakpoints", size = 0.25 },
+                  { id = "stacks", size = 0.25 },
+                  { id = "watches", size = 0.25 }
+                },
+                size = 40,
+                position = "left"
+              }
+            }
+          })
+
+          vim.keymap.set('n', '<leader>da', dapui.toggle)
+          vim.keymap.set('n', '<leader>dj', function()
+            dapui.toggle(1)
+          end)
+          vim.keymap.set('n', '<leader>dh', function()
+            dapui.toggle(2)
+          end)
+        end
+      }
+    },
+
+  },
+  {
+    'neovim/nvim-lspconfig',
+    event = 'VeryLazy',
+    config = function()
+      require('_lsp')
+    end,
+    dependencies = {
+      {
+        'williamboman/mason-lspconfig.nvim',
+        opts = {}
+      },
+      'hrsh7th/cmp-nvim-lsp',
+    }
+  },
   'nvim-neotest/nvim-nio',
-  'nvim-treesitter/nvim-treesitter',
+  {
+    'nvim-treesitter/nvim-treesitter',
+    lazy = false,
+    config = function()
+      local treesitter_configs = require('nvim-treesitter.configs')
+      local treesitter_install = require('nvim-treesitter.install')
+
+      treesitter_configs.setup {
+        sync_install = false,
+        auto_install = false,
+
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false
+        }
+      }
+
+      treesitter_install.compilers = ({
+        Linux = { 'gcc' },
+        Windows_NT = { 'clang' }
+      })[os]
+    end
+  },
   {
     'stevearc/oil.nvim',
-    opts = {},
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    cmd = 'Oil',
+    opts = {
+      default_file_explorer = true,
+      columns = {
+        'icon'
+      },
+      keymaps = {
+        ['<C-v>'] = { 'actions.select', opts = { vertical = true } },
+        ['<C-x>'] = { 'actions.select', opts = { horizontal = true } },
+      }
+    },
+    dependencies = {
+      'nvim-tree/nvim-web-devicons'
+    }
   },
   'pysan3/pathlib.nvim',
-  'https://gitlab.com/itaranto/plantuml.nvim',
+  {
+    'https://gitlab.com/itaranto/plantuml.nvim',
+    ft = 'uml',
+    opts = {
+      renderer = {
+        type = 'image',
+        options = {
+          prog = 'feh',
+          dark_mode = true
+        }
+      }
+    }
+  },
   'nvim-lua/plenary.nvim',
-  'toppair/reach.nvim',
+  {
+    'toppair/reach.nvim',
+    config = function()
+      local reach = require('reach')
+
+      reach.setup {
+        notifications = false
+      }
+
+
+      vim.keymap.set('n', '<leader>w', function()
+        reach.buffers {
+          auto_handles = vim.split('jfkdlshgurnciemxow,ypq.<', '')
+        }
+      end)
+    end
+  },
   'rest-nvim/rest.nvim',
-  'nvim-telescope/telescope.nvim',
+  {
+    'nvim-telescope/telescope.nvim',
+    keys = { '<leader><leader>' },
+    config = function()
+      local telescope = require('telescope')
+      local telescope_builtin = require('telescope.builtin')
+
+      telescope.setup()
+
+      vim.keymap.set('n', '<leader><leader>f', telescope_builtin.find_files)
+      vim.keymap.set('n', '<leader><leader>l', telescope_builtin.live_grep)
+      vim.keymap.set('n', '<leader><leader>w', "<Cmd>Telescope workspaces<CR>")
+      vim.keymap.set('n', '<leader><leader>a', "<Cmd>Telescope aerial<CR>")
+    end
+  },
   'voldikss/vim-floaterm',
   'normen/vim-pio',
-  'lervag/vimtex',
+  {
+    'lervag/vimtex',
+    ft = { 'tex', 'ltx' }
+  },
   -- ???
   -- 'jubnzv/virtual-types.nvim',
   --
-  'natecraddock/workspaces.nvim'
-}
+  {
+    'natecraddock/workspaces.nvim',
+    event = 'VeryLazy',
+    config = function()
+      local telescope = require('telescope')
+      local workspaces = require('workspaces')
+
+      workspaces.setup {
+        sort = true,
+        mru_sort = true,
+        auto_open = true,
+        hooks = {
+          open = { "SessionManager load_current_dir_session" }
+        }
+      }
+
+      telescope.load_extension('workspaces')
+    end,
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+    }
+  }
+}, {
+  defaults = { lazy = true }
+})

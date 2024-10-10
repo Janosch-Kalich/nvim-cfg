@@ -54,9 +54,19 @@ end
 local dap_cfg = {
   Linux = function()
     codelldb('codelldb')
+
+    vim.keymap.set('n', '<leader>l', dap.continue)
+    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+    vim.keymap.set('n', '<leader>k', dap.step_over)
+    vim.keymap.set('n', '<leader>j', dap.step_into)
   end,
   Windows_NT = function()
     codelldb('codelldb.cmd')
+
+    vim.keymap.set('n', '<leader>l', dap.continue)
+    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+    vim.keymap.set('n', '<leader>k', dap.step_over)
+    vim.keymap.set('n', '<leader>j', dap.step_into)
   end
 }
 
