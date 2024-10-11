@@ -2,7 +2,7 @@ if exists('b.current_syntax')
   finish
 endif
 
-syn keyword instruction add addi sub subi or ori beq
+syn keyword instruction add addi sub subi or ori beq sd sdi ld ldi
 
 syn match register /x\(3[01]\|[0-2][0-9]\|[0-9]\)\(\s\|\n\|,\)\@=/
 

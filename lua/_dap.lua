@@ -4,6 +4,7 @@ local finders = require('telescope.finders')
 local conf = require('telescope.config').values
 local actions = require('telescope.actions')
 local action_state = require('telescope.actions.state')
+local mason_nvim_dap = require('mason-nvim-dap')
 
 function codelldb(exec_name)
   dap.adapters.codelldb = {
@@ -55,18 +56,16 @@ local dap_cfg = {
   Linux = function()
     codelldb('codelldb')
 
-    vim.keymap.set('n', '<leader>l', dap.continue)
-    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
-    vim.keymap.set('n', '<leader>k', dap.step_over)
-    vim.keymap.set('n', '<leader>j', dap.step_into)
+    mason_nvim_dap.setup {
+      handlers = {}
+    }
   end,
   Windows_NT = function()
     codelldb('codelldb.cmd')
 
-    vim.keymap.set('n', '<leader>l', dap.continue)
-    vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
-    vim.keymap.set('n', '<leader>k', dap.step_over)
-    vim.keymap.set('n', '<leader>j', dap.step_into)
+    mason_nvim_dap.setup {
+      handlers = {}
+    }
   end
 }
 

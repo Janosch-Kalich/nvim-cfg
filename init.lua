@@ -1,24 +1,19 @@
 local os = vim.loop.os_uname().sysname
 
-require('plugins')
-
 local cfg = require('cfg')
 
 -- vim.g {{{1
 
+vim.g.mapleader = ' '
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.vimtex_view_method = 'mupdf'
-vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.g.floaterm_shell = cfg.floaterm_shell[os]
 
 -- }}}
 
--- SETUP {{{1
-
-
--- }}}
+require('plugins')
 
 -- NEOVIDE {{{1
 
@@ -65,9 +60,6 @@ vim.diagnostic.config({
 })
 
 -- KEYMAPS {{{1
-
--- DAP {{{2
--- }}}
 
 -- LSP {{{2
 vim.keymap.set('n', '<localleader>h', vim.lsp.buf.hover)

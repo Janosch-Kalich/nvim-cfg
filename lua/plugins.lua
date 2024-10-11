@@ -14,7 +14,8 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-  -- !!!
+
+  -- AERIAL {{{1
   {
     'stevearc/aerial.nvim',
     event = 'VeryLazy',
@@ -35,10 +36,12 @@ require('lazy').setup({
       'nvim-telescope/telescope.nvim',
     }
   },
-  --
+  -- }}}
+
+  -- BARBAR {{{1
   {
     'romgrk/barbar.nvim',
-    event = 'VeryLazy',
+    lazy = false,
     opts = {
       animation = true,
       auto_hide = true,
@@ -54,33 +57,54 @@ require('lazy').setup({
       }
     }
   },
+  -- }}}
+
+  -- DRESSING {{{1
   {
     'stevearc/dressing.nvim',
+    event = 'VeryLazy',
     opts = {}
   },
+  -- }}}
+
+  -- FASM {{{1
   'fedorenchik/fasm.vim',
   {
     'j-hui/fidget.nvim',
     event = 'VeryLazy',
     opts = {}
   },
+  -- }}}
+
+  -- FLUTTER-TOOLS {{{1
   {
     'akinsho/flutter-tools.nvim',
     ft = 'dart',
     opts = {}
   },
-  -- !!!
+  -- }}}
+
+  -- GITSIGNS !!! {{{1
   'lewis6991/gitsigns.nvim',
-  --
+  -- }}}
+
+  -- HASKELL-TOOLS {{{1
   {
     'mrcjkb/haskell-tools.nvim',
     version = '^3',
     ft = { 'haskell', 'lhaskell', 'cabal', 'cabalproject' }
   },
+  -- }}}
+
+  -- HEX {{{1
   {
     'RaafatTurki/hex.nvim',
+    event = 'VeryLazy',
     opts = {}
   },
+  -- }}}
+
+  -- HOP {{{1
   {
     'smoka7/hop.nvim',
     event = 'VeryLazy',
@@ -103,35 +127,25 @@ require('lazy').setup({
       vim.keymap.set('', '<leader>hp', hop.hint_patterns)
     end
   },
+  -- }}}
+
+  -- INDENT-BLANKLINE {{{1
   {
     'lukas-reineke/indent-blankline.nvim',
+    event = 'VeryLazy',
     main = 'ibl',
     opts = {}
   },
+  -- }}}
+
+  -- NVIM-JAVA {{{1
   {
     'nvim-java/nvim-java',
-    ft = 'java',
-    dependencies = {
-      'nvim-java/nvim-java-refactor',
-      'nvim-java/lua-async-await',
-      'nvim-java/nvim-java-core',
-      'nvim-java/nvim-java-test',
-      'nvim-java/nvim-java-dap',
-      'nvim-java/nvim-java-refactor',
-      'MunifTanjim/nui.nvim',
-      'neovim/nvim-lspconfig',
-      'mfussenegger/nvim-dap',
-      {
-        'williamboman/mason.nvim',
-        opts = {
-          registries = {
-            'github:nvim-java/mason-registry',
-            'github:mason-org/mason-registry'
-          }
-        }
-      }
-    }
+    ft = 'java'
   },
+  --}}}
+
+  -- KNAP {{{1
   {
     'frabjous/knap',
     ft = { 'tex', 'ltx', 'md' },
@@ -149,12 +163,21 @@ require('lazy').setup({
       vim.keymap.set({ 'n', 'v', 'i' },'<F5>', knap.process_once)
     end
   },
+  -- }}}
+
+  -- LSP_LINES {{{1
   {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
     event = 'VeryLazy',
     opts = {}
   },
+  -- }}}
+
+  -- LUA-UTILS {{{1
   'nvim-neorg/lua-utils.nvim',
+  -- }}}
+
+  -- LUALINE {{{1
   {
     'nvim-lualine/lualine.nvim',
     lazy = false,
@@ -162,27 +185,41 @@ require('lazy').setup({
       require('bubbles')
     end
   },
+  -- }}}
+
+  -- LUAROCKS {{{1
   'vhyrro/luarocks.nvim',
+  -- }}}
+
+  -- LUASNIP {{{1
   'L3MON4D3/LuaSnip',
+  -- }}}
+
+  -- MARKDOWN-PREVIEW {{{1
   {
     'iamcco/markdown-preview.nvim',
     run = vim.fn['mkdp#util#install']
   },
+  -- }}}
+
+  -- MASON {{{1
   {
     'williamboman/mason.nvim',
     cmd = 'Mason',
     opts = {}
   },
+  -- }}}
+
+  -- MASON-NVIM-DAP {{{1
   {
     'jay-babu/mason-nvim-dap.nvim',
-    event = 'VeryLazy',
-    config = function()
-      local mason_nvim_dap = require('mason-nvim-dap')
-      mason_nvim_dap.setup {
-        handlers = {}
-      }
-    end
+    dependencies = {
+      'williamboman/mason.nvim',
+    }
   },
+  -- }}}
+
+  -- NABLA {{{1
   {
     'jbyuki/nabla.nvim',
     ft = 'md',
@@ -191,14 +228,20 @@ require('lazy').setup({
       vim.keymap.set({'n'}, '<leader>nv', nable.toggle_virt)
     end
   },
+  -- }}}
+
+  -- NEOGIT {{{1
   {
     "NeogitOrg/neogit",
     event = "VeryLazy",
     dependencies = {
-      "sindrets/diffview.nvim",        -- optional - Diff integration
+      "sindrets/diffview.nvim"        -- optional - Diff integration
     },
     config = true
   },
+  -- }}}
+
+  -- NEORG {{{1
   {
     'nvim-neorg/neorg',
     cmd = 'Neorg',
@@ -216,6 +259,9 @@ require('lazy').setup({
       }
     }
   },
+  -- }}}
+
+  -- NEOVIM-SESSION-MANAGER {{{1
   {
     'Shatur/neovim-session-manager',
     lazy = false,
@@ -241,11 +287,17 @@ require('lazy').setup({
       }
     end
   },
+  -- }}}
+
+  -- NUMB {{{1
   {
     'nacro90/numb.nvim',
     event = 'VeryLazy',
     opts = {}
   },
+  -- }}}
+
+  -- NIGHTFOX {{{1
   {
     'EdenEast/nightfox.nvim',
     lazy = false,
@@ -262,6 +314,9 @@ require('lazy').setup({
       vim.cmd('colorscheme carbonfox')
     end
   },
+  -- }}}
+
+  -- NVIM-CMP {{{1
   {
     'hrsh7th/nvim-cmp',
     event = 'VeryLazy',
@@ -312,6 +367,9 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
     }
   },
+  -- }}}
+
+  -- NVIM-CURSORLINE {{{1
   {
     'yamatsum/nvim-cursorline',
     event = 'VeryLazy',
@@ -326,58 +384,73 @@ require('lazy').setup({
       }
     }
   },
+  -- }}}
+
+  -- NVIM-DAP {{{1
   {
     'mfussenegger/nvim-dap',
     event = 'VeryLazy',
     config = function() 
       local dap_cfg = require('_dap')
+      local dap = require('dap')
 
       dap_cfg[os]()
+
+      vim.keymap.set('n', '<leader>l', dap.continue)
+      vim.keymap.set('n', '<leader>b', dap.toggle_breakpoint)
+      vim.keymap.set('n', '<leader>k', dap.step_over)
+      vim.keymap.set('n', '<leader>j', dap.step_into)
     end,
-    dependencies = {
-      {
-        'rcarriga/nvim-dap-ui',
-        config = function()
-          local dapui = require('dapui')
-          dapui.setup({
-            layouts = {
-              {
-                elements = {
-                  { id = "repl", size = 0.25 },
-                  { id = "console", size = 0.75 }
-                },
-                size = 10,
-                position = "bottom"
-              },
-              {
-                elements = {
-                  { id = "scopes", size = 0.25 },
-                  { id = "breakpoints", size = 0.25 },
-                  { id = "stacks", size = 0.25 },
-                  { id = "watches", size = 0.25 }
-                },
-                size = 40,
-                position = "left"
-              }
-            }
-          })
-
-          vim.keymap.set('n', '<leader>da', dapui.toggle)
-          vim.keymap.set('n', '<leader>dj', function()
-            dapui.toggle(1)
-          end)
-          vim.keymap.set('n', '<leader>dh', function()
-            dapui.toggle(2)
-          end)
-        end
-      }
-    },
-
   },
+  -- }}}
+
+  -- NVIM-DAP-UI {{{1
+  {
+    'rcarriga/nvim-dap-ui',
+    event = 'VeryLazy',
+    config = function()
+      local dapui = require('dapui')
+      dapui.setup({
+        layouts = {
+          {
+            elements = {
+              { id = "repl", size = 0.25 },
+              { id = "console", size = 0.75 }
+            },
+            size = 10,
+            position = "bottom"
+          },
+          {
+            elements = {
+              { id = "scopes", size = 0.25 },
+              { id = "breakpoints", size = 0.25 },
+              { id = "stacks", size = 0.25 },
+              { id = "watches", size = 0.25 }
+            },
+            size = 40,
+            position = "left"
+          }
+        }
+      })
+
+      vim.keymap.set('n', '<leader>da', dapui.toggle)
+      vim.keymap.set('n', '<leader>dj', function()
+        dapui.toggle(1)
+      end)
+      vim.keymap.set('n', '<leader>dh', function()
+        dapui.toggle(2)
+      end)
+    end,
+  },
+  -- }}}
+
+  -- NVIM-LSPCONFIG {{{1
   {
     'neovim/nvim-lspconfig',
     event = 'VeryLazy',
     config = function()
+      require('java').setup()
+
       require('_lsp')
     end,
     dependencies = {
@@ -385,10 +458,16 @@ require('lazy').setup({
         'williamboman/mason-lspconfig.nvim',
         opts = {}
       },
-      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp'
     }
   },
+  -- }}}
+
+  -- NVIM-NIO {{{1
   'nvim-neotest/nvim-nio',
+  -- }}}
+
+  -- NVIM-TREESITTER {{{1
   {
     'nvim-treesitter/nvim-treesitter',
     lazy = false,
@@ -412,6 +491,9 @@ require('lazy').setup({
       })[os]
     end
   },
+  -- }}}
+
+  -- OIL {{{1
   {
     'stevearc/oil.nvim',
     cmd = 'Oil',
@@ -429,7 +511,13 @@ require('lazy').setup({
       'nvim-tree/nvim-web-devicons'
     }
   },
+  -- }}}
+
+  -- PATHLIB {{{1
   'pysan3/pathlib.nvim',
+  -- }}}
+
+  -- PLANTUML {{{1
   {
     'https://gitlab.com/itaranto/plantuml.nvim',
     ft = 'uml',
@@ -443,7 +531,13 @@ require('lazy').setup({
       }
     }
   },
+  -- }}}
+
+  -- PLENARY {{{1
   'nvim-lua/plenary.nvim',
+  -- }}}
+
+  -- REACH {{{1
   {
     'toppair/reach.nvim',
     config = function()
@@ -461,7 +555,13 @@ require('lazy').setup({
       end)
     end
   },
+  -- }}}
+
+  -- REST {{{1
   'rest-nvim/rest.nvim',
+  -- }}}
+
+  -- TELESCOPE {{{1
   {
     'nvim-telescope/telescope.nvim',
     keys = { '<leader><leader>' },
@@ -477,17 +577,31 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader><leader>a', "<Cmd>Telescope aerial<CR>")
     end
   },
+  -- }}}
+
+  -- VIM-FLOATERM {{{1
   'voldikss/vim-floaterm',
+  -- }}}
+
+  -- VIM-PIO {{{1
   'normen/vim-pio',
+  -- }}}
+
+  -- VIMTEX {{{1
   {
     'lervag/vimtex',
     ft = { 'tex', 'ltx' }
   },
-  -- ???
+  -- }}}
+
+  -- VIRTUAL-TYPES ??? {{{1
   -- 'jubnzv/virtual-types.nvim',
-  --
+  -- }}}
+
+  -- WORKSPACE {{{1
   {
     'natecraddock/workspaces.nvim',
+    -- lazy = false,
     event = 'VeryLazy',
     config = function()
       local telescope = require('telescope')
@@ -505,9 +619,11 @@ require('lazy').setup({
       telescope.load_extension('workspaces')
     end,
     dependencies = {
-      'nvim-telescope/telescope.nvim',
+      'nvim-telescope/telescope.nvim'
     }
   }
+  -- }}}
+
 }, {
   defaults = { lazy = true }
 })
