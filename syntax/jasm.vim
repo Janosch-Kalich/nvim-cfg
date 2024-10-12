@@ -2,7 +2,7 @@ if exists('b.current_syntax')
   finish
 endif
 
-syn keyword instruction add addi sub subi mul muli div divi mod modi and andi or ori xor xori sll slli srl srli beq ja jai jr jri jal jali jrl jrli sd sdi ld ldi mov movi push pop call
+syn keyword instruction add addi sub subi mul muli div divi mod modi and andi or ori xor xori sll slli srl srli beq ja jai jr jri jal jali jrl jrli hlt sd sdi ld ldi mov movi push pop call ret
 
 syn match register /x\(3[01]\|[0-2][0-9]\|[0-9]\)\(\s\|\n\|,\)\@=/
 
