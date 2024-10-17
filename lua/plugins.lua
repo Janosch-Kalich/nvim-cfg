@@ -230,6 +230,13 @@ require('lazy').setup({
   },
   -- }}}
 
+  -- NEOCONF {{{1
+  {
+    'folke/neoconf.nvim',
+    opts = {}
+  },
+  -- }}}
+
   -- NEOGIT {{{1
   {
     "NeogitOrg/neogit",
@@ -454,6 +461,7 @@ require('lazy').setup({
       require('_lsp')
     end,
     dependencies = {
+      "folke/neoconf.nvim",
       {
         'williamboman/mason-lspconfig.nvim',
         opts = {}
