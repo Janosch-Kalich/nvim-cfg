@@ -573,6 +573,7 @@ require('lazy').setup({
 
       vim.keymap.set('n', '<leader><leader>f', telescope_builtin.find_files)
       vim.keymap.set('n', '<leader><leader>l', telescope_builtin.live_grep)
+      vim.keymap.set('n', '<leader><leader>o', telescope_builtin.buffers)
       vim.keymap.set('n', '<leader><leader>w', "<Cmd>Telescope workspaces<CR>")
       vim.keymap.set('n', '<leader><leader>a', "<Cmd>Telescope aerial<CR>")
     end

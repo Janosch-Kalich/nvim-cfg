@@ -14,7 +14,7 @@ function! s:getAsmIndent()
 
   " If the line is a label (starts with ':' terminated keyword), 
   " then don't indent
-  if line =~ '^\s*@\k\+:'
+  if line =~ '\(^\s*@\k\+:\)\|\(^\s*\d\)'
     let ind = 0
   endif
 
