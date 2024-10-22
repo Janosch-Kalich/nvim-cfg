@@ -34,6 +34,7 @@ end
 
 -- vim.opt {{{1
 
+vim.opt.tabstop = 4
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
 vim.opt.termguicolors = true
