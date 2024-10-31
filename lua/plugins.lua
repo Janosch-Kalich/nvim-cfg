@@ -252,6 +252,7 @@ require('lazy').setup({
   {
     'nvim-neorg/neorg',
     cmd = 'Neorg',
+    lazy = false,
     opts = {
       load = {
         ['core.defaults'] = {},
