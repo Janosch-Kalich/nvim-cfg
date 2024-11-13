@@ -99,6 +99,8 @@ vim.keymap.set({'n'}, '<leader>t', ':FloatermToggle<CR>')
 vim.keymap.set({'t'}, '<Esc>', '<C-\\><C-n>')
 -- }}}
 
+vim.keymap.set({'n'}, '<leader>1', ':Neogit<CR>')
+
 -- Oil {{{2
 vim.keymap.set({'n'}, '<leader>o', '<cmd>:Oil<CR>')
 -- }}}

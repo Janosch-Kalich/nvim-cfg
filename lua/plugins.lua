@@ -344,22 +344,22 @@ require('lazy').setup({
         mapping = cmp.mapping.preset.insert {
           ['<C-b>'] = cmp.mapping.scroll_docs(-4),
           ['<C-f>'] = cmp.mapping.scroll_docs(4),
-          ['<C-j>'] = function()
+          ['<A-j>'] = function()
             if cmp.visible() then
               cmp.select_next_item { behavior = cmp.SelectBehavior.Insert }
             else
               cmp.complete()
             end
           end,
-          ['<C-k>'] = function()
+          ['<A-k>'] = function()
             if cmp.visible() then
               cmp.select_prev_item { behavior = cmp.SelectBehavior.Insert }
             else
               cmp.complete()
             end
           end,
-          ['<C-h>'] = cmp.mapping.abort(),
-          ['<C-l>'] = cmp.mapping.confirm { select = true },
+          ['<A-h>'] = cmp.mapping.abort(),
+          ['<A-l>'] = cmp.mapping.confirm { select = true },
         },
         sources = cmp.config.sources {
           { name = 'nvim_lsp' },
