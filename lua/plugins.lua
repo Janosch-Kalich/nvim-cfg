@@ -188,7 +188,10 @@ require('lazy').setup({
   -- }}}
 
   -- LUAROCKS {{{1
-  'vhyrro/luarocks.nvim',
+  {
+    'vhyrro/luarocks.nvim',
+    lazy = false
+  },
   -- }}}
 
   -- LUASNIP {{{1
