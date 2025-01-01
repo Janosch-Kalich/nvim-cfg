@@ -4,6 +4,12 @@ local lspconfig = require('lspconfig')
 
 local lsp_capabilities = cmp_nvim_lsp.default_capabilities()
 
+local vue_typescript_plugin = require('mason-registry')
+  .get_package('vue-language-server')
+  :get_install_path()
+  .. '/node_modules/@vue/language-server'
+  .. '/node_modules/@vue/typescript-plugin'
+
 mason_lspconfig.setup_handlers {
   function(server_name)
     lspconfig[server_name].setup {
@@ -23,15 +29,23 @@ mason_lspconfig.setup_handlers {
         'ltx', 'tex', 'md'
       }
     }
-  end
-  --[[
-  ['tsserver'] = function()
-    lspconfig.tsserver.setup ({
+  end,
+  ['volar'] = function()
+    lspconfig.volar.setup {
+      init_options = {
+        typescript = {
+          tsdk = os.getenv('TSDK')
+        }
+      }
+    }
+  end,
+  ['ts_ls'] = function()
+    lspconfig.ts_ls.setup ({
       init_options = {
         plugins = {
           {
             name = '@vue/typescript-plugin',
-            location = config.typescript_plugin,
+            location = vue_typescript_plugin,
             languages = {'javascript', 'typescript', 'vue'},
           },
         },
@@ -41,5 +55,4 @@ mason_lspconfig.setup_handlers {
       }
     })
   end,
-  --]]
 }

@@ -5,5 +5,8 @@
     "redefined-local",
     "redefined-label"
   ],
-  "workspace.checkThirdParty": false
+  "workspace.checkThirdParty": false,
+    "diagnostics.globals": [
+        "curl_download"
+    ]
 }

@@ -60,7 +60,21 @@ vim.diagnostic.config({
   virtual_text = false
 })
 
+function curl_download() 
+  vim.ui.input({ prompt = 'Filename'}, function (filename)
+    if filename ~= nil then
+      vim.ui.input({ prompt = 'URL'}, function (url)
+        if url ~= nil then
+          vim.system({'curl', '-o', filename, url}):wait()
+        end
+      end)
+    end
+  end)
+end
+
 -- KEYMAPS {{{1
+
+vim.keymap.set('n', '<leader>2', curl_download)
 
 -- LSP {{{2
 vim.keymap.set('n', '<localleader>h', vim.lsp.buf.hover)

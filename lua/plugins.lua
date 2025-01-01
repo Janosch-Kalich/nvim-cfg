@@ -62,7 +62,7 @@ require('lazy').setup({
   -- DRESSING {{{1
   {
     'stevearc/dressing.nvim',
-    event = 'VeryLazy',
+    lazy = false,
     opts = {}
   },
   -- }}}
@@ -162,6 +162,25 @@ require('lazy').setup({
 
       vim.keymap.set({ 'n', 'v', 'i' },'<F5>', knap.process_once)
     end
+  },
+  -- }}}
+
+  -- LEAN {{{1
+  {
+    'Julian/lean.nvim',
+    event = { 'BufReadPre *.lean', 'BufNewFile *.lean' },
+
+    dependencies = {
+      'neovim/nvim-lspconfig',
+      'nvim-lua/plenary.nvim',
+      -- you also will likely want nvim-cmp or some completion engine
+    },
+
+    -- see details below for full configuration options
+    opts = {
+      lsp = {},
+      mappings = true,
+    }
   },
   -- }}}
 
