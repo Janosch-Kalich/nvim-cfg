@@ -52,7 +52,8 @@ vim.wo.number = true
 vim.filetype.add {
   extension = {
     fasm = 'fasm',
-    jasm = 'jasm'
+    jasm = 'jasm',
+    jir = 'jir'
   }
 }
 
