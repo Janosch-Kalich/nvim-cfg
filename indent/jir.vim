@@ -3,22 +3,18 @@ if exists("b:did_indent")
 endif
 let b:did_indent = 1
 
-setlocal indentexpr=s:getJasmIndent()
+setlocal indentexpr=s:getJirIndent()
 setlocal indentkeys=<:>,!^F,o,O
 
 let b:undo_indent = "setlocal indentexpr< indentkeys<"
 
-function! s:getJasmIndent()
+function! s:getJirIndent()
   let line = getline(v:lnum)
   let ind = shiftwidth()
 
-  " If the line is a label (starts with ':' terminated keyword), 
-  " then don't indent
-  if line =~ '\(^\s*@\k\+:\)\|\(^\s*\d\)'
+  if line =~ '^\s*\(\(@[a-zA-Z0-9]\+.*{\)\|}\|\(\.[a-zA-Z0-9]\+\)\|\(#.*\)\)$'
     let ind = 0
   endif
-
-  echo 'Hi :3'
 
   return ind
 endfunction
