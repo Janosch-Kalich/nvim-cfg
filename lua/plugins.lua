@@ -262,10 +262,19 @@ require('lazy').setup({
 
   -- NEOGIT {{{1
   {
-    "NeogitOrg/neogit",
-    event = "VeryLazy",
+    'NeogitOrg/neogit',
+    event = 'VeryLazy',
     dependencies = {
-      "sindrets/diffview.nvim"        -- optional - Diff integration
+      {
+        'sindrets/diffview.nvim',
+        opts = {
+          key_bindings = {
+            file_history_panel = { q = '<Cmd>DiffviewClose<CR>' },
+            file_panel = { q = '<Cmd>DiffviewClose<CR>' },
+            view = { q = '<Cmd>DiffviewClose<CR>' },
+          }
+        }
+      }
     },
     config = true
   },
