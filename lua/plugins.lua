@@ -581,6 +581,7 @@ require('lazy').setup({
   -- REACH {{{1
   {
     'toppair/reach.nvim',
+    lazy = false,
     config = function()
       local reach = require('reach')
 
