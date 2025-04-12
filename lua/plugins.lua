@@ -244,6 +244,7 @@ require('lazy').setup({
   -- NABLA {{{1
   {
     'jbyuki/nabla.nvim',
+    lazy = false,
     ft = 'md',
     config = function()
       local nable = require('nabla')
