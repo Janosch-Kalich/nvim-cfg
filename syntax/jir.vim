@@ -2,7 +2,7 @@ if exists('b.current_syntax')
   finish
 endif
 
-syn keyword instruction const add sub mul div eq gt lt geq leq jmp br ret call copy cast str ref deref
+syn keyword instruction const add sub mul div eq gt lt geq leq jmp br ret call copy cast str ref deref salloc setref
 
 syn match directive /#\(\(pub\)\|\(ext\)\)/
 
