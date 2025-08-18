@@ -10,9 +10,9 @@ syn match comment /;.*$/
 
 syn match string /".*"/
 
-syn keyword type void byte word dword qword single double
+syn keyword type void byte word dword qword single double u8 i8 u16 i16 u32 i32 u64 i64 f32 f64 bool
 
-syn match ops /[{()}:]/
+syn match ops /[{(\[\])}:&]/
 
 syn match number /\d\+/
 syn match float /\(\d*\.\d\+\)\|\(\d\+\.\d*\)/
