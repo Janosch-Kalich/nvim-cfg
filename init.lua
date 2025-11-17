@@ -9,7 +9,6 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.vimtex_view_method = 'mupdf'
 vim.g.maplocalleader = ','
-vim.g.floaterm_shell = cfg.floaterm_shell[os]
 
 -- }}}
 
@@ -89,10 +88,6 @@ vim.keymap.set('n', '<localleader>c', vim.lsp.buf.code_action)
 vim.keymap.set('n', '<leader>x', '<cmd>AerialToggle!<CR>')
 -- }}}
 
--- Rest {{{2
-vim.keymap.set('n', '<leader>rn', '<Plug>RestNvim<CR>')
--- }}}
-
 -- Tab {{{2
 vim.keymap.set({'n'}, '<C-Tab>', '<Cmd>BufferNext<CR>')
 vim.keymap.set({'n'}, '<C-S-Tab>', '<Cmd>BufferPrevious<CR>')
@@ -108,11 +103,6 @@ vim.keymap.set({'n'}, '<A-8>', '<Cmd>BufferGoto 8<CR>')
 vim.keymap.set({'n'}, '<A-9>', '<Cmd>BufferGoto 9<CR>')
 vim.keymap.set({'n'}, '<A-0>', '<Cmd>BufferGoto 10<CR>')
 vim.keymap.set({'n'}, '<leader>p', '<Cmd>BufferPick<CR>')
--- }}}
-
--- Floaterm {{{2
-vim.keymap.set({'n'}, '<leader>t', ':FloatermToggle<CR>')
-vim.keymap.set({'t'}, '<Esc>', '<C-\\><C-n>')
 -- }}}
 
 vim.keymap.set({'n'}, '<leader>1', ':Neogit<CR>')
